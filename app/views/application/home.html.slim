@@ -1,0 +1,11 @@
+.text-center
+  h1 Listas de compra/venta a precio TCG Market Price
+  - @users.each do |user|
+    p.text-success #{user.first_name} #{user.last_name} (#{user.phone})
+    .row
+      .col-xs-6
+        p.text-warning Compra
+        p #{user.buy}
+      .col-xs-6
+        p.text-warning Vende
+        p #{user.sell}

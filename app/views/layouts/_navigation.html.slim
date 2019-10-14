@@ -1,0 +1,12 @@
+ul class="nav navbar-nav"
+  li= link_to('<span class="glyphicon glyphicon-home"></span> Home'.html_safe, root_path)
+  li= link_to('<span class="glyphicon glyphicon-user"></span> Info'.html_safe, info_path)
+  - if current_user
+    li= link_to('<span class="glyphicon glyphicon-cog"></span> Configuración (y mi lista de compra/venta)'.html_safe, edit_user_registration_path)
+
+ul class="nav navbar-nav navbar-right"
+  - if current_user
+    li= link_to('<span class="glyphicon glyphicon-off"></span> Log out'.html_safe, destroy_user_session_path, method: 'delete')
+  - else
+    li= link_to('<span class="glyphicon glyphicon-log-in"></span> Login'.html_safe, new_user_session_path)
+    li= link_to('<span class="glyphicon glyphicon-saved"></span> Register'.html_safe, new_user_registration_path)
