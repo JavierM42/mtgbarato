@@ -32,11 +32,11 @@
 
           .form-group
             = f.label(:buy)
-            = f.text_field(:buy, placeholder: 'Qué buscás?', class: 'form-control')
+            = f.text_area(:buy, placeholder: 'Qué buscás?', class: 'form-control', style: "height: 400px")
 
           .form-group
             = f.label(:sell)
-            = f.text_field(:sell, placeholder: 'Qué vendés?', class: 'form-control')
+            = f.text_area(:sell, placeholder: 'Qué vendés?', class: 'form-control', style: "height: 400px")
 
           .form-group
             = f.label(:password)
