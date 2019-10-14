@@ -97,7 +97,7 @@ GEM
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     pg (1.1.4)
-    puma (3.6.0)
+    puma (3.6.2)
     rack (2.0.7)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -199,7 +199,7 @@ DEPENDENCIES
   jquery-rails (= 4.1.1)
   listen (~> 3.0.5)
   pg
-  puma (= 3.6.0)
+  puma (~> 3.6.0)
   rails (~> 5.0)
   sass-rails (= 5.0.6)
   slim-rails (= 3.1.0)
