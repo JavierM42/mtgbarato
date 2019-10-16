@@ -14,44 +14,45 @@
             .alert.alert-warning
               = devise_error_messages!
 
-          .form-group
-            = f.label(:first_name)
-            = f.text_field(:first_name, autofocus: true, placeholder: 'First name', class: 'form-control')
+          .row
+            .form-group.col-lg-6
+              = f.label(:first_name, "Nombre")
+              = f.text_field(:first_name, autofocus: true, placeholder: 'First name', class: 'form-control')
 
-          .form-group
-            = f.label(:last_name)
-            = f.text_field(:last_name, placeholder: 'Last name', class: 'form-control')
+            .form-group.col-lg-6
+              = f.label(:last_name, "Apellido")
+              = f.text_field(:last_name, placeholder: 'Last name', class: 'form-control')
 
           .form-group
             = f.label(:email)
             = f.email_field(:email, placeholder: 'Hello@youremail.com', class: 'form-control')
 
           .form-group
-            = f.label(:phone)
+            = f.label(:phone, "Celular")
             = f.text_field(:phone, placeholder: '095 555 555', class: 'form-control')
 
           .form-group
             = f.label(:buy, "Qué buscás?")
-            p.italic formato: Nx Nombre de carta (notas)
+            i= ' formato: Nx Nombre de carta (notas)'
             = f.text_area(:buy, placeholder: "usá este formato:\n2x Black Lotus\n1x Mox Sapphire (mordido por el perro)", class: 'form-control', style: "height: 400px")
 
           .form-group
             = f.label(:sell, "Qué vendés?")
-            p.italic formato: Nx Nombre de carta (notas)
+            i= ' formato: Nx Nombre de carta (notas)'
             = f.text_area(:sell, placeholder: "usá este formato:\n4x Goblin Guide\n4x Sacred Foundry (guilds of ravnica, en portugués)", class: 'form-control', style: "height: 400px")
 
           .form-group
-            = f.label(:password)
+            = f.label(:password, "Contraseña")
             - if @minimum_password_length
-              em= " (#{@minimum_password_length} characters minimum)"
+              em= " (mínimo #{@minimum_password_length} caracteres)"
             = f.password_field(:password, autocomplete: 'off', placeholder: 'Password', class: 'form-control')
 
           .form-group
-            = f.label(:password_confirmation)
+            = f.label(:password_confirmation, "Confirmación de contraseña")
             = f.password_field(:password_confirmation, autocomplete: 'off', placeholder: 'Password confirmation', class: 'form-control')
-          = f.submit('Register', class: 'btn btn-primary btn-block')
+          = f.submit('Registrarme', class: 'btn btn-primary btn-block')
 
       .panel-footer
         p
-          = 'Already Registered? Log In '
-          = link_to('here', new_user_session_path)
+          = 'Ya registrado? Iniciá sesión '
+          = link_to('acá', new_user_session_path)
