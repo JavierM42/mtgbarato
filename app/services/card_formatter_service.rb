@@ -21,13 +21,18 @@ class CardFormatterService
       {
         amount: amount.to_i,
         card: unparsed,
-        link: get_link(unparsed),
+        deckbox_link: deckbox_link(unparsed),
+        tcg_link: tcg_link(unparsed),
         notes: notes
       }
     end
   end
 
-  def get_link(card_name)
+  def deckbox_link(card_name)
     "https://deckbox.org/mtg/#{URI.escape(card_name)}"
+  end
+
+  def tcg_link(card_name)
+    "https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{card_name.gsub(" ", "+")}&orientation=list"
   end
 end

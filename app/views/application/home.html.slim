@@ -9,34 +9,39 @@
   h2 Cartas en venta
   table.sortable-theme-light.w-full data-sortable=""
     thead
-      th Vende
       th Cantidad
       th Carta
       th Notas
+      th Precio TCG
+      th Vende
     tbody
       - @users.each do |user|
         - user.formatted_sell.each do |line_item|
           tr
-            td #{user.first_name} #{user.last_name} (#{user.phone})
             td #{line_item[:amount]}
             td
-              a href="#{line_item[:link]}" #{line_item[:card]}
+              a href="#{line_item[:deckbox_link]}" #{line_item[:card]}
             td #{line_item[:notes]}
+            td 
+              a href="#{line_item[:tcg_link]}" target="_blank" Ver en TCG
+            td #{user.first_name} #{user.last_name} (#{user.phone})
 
   h2 Cartas buscadas
   table.sortable-theme-light.w-full data-sortable=""
     thead
-      th Busca
       th Cantidad
       th Carta
       th Notas
+      th Precio TCG
+      th Busca
     tbody
       - @users.each do |user|
         - user.formatted_buy.each do |line_item|
           tr
-            td #{user.first_name} #{user.last_name} (#{user.phone})
             td #{line_item[:amount]}
             td
-              a href="#{line_item[:link]}" #{line_item[:card]}
-            td #{line_item[:notes]}
+              a href="#{line_item[:deckbox_link]}" #{line_item[:card]}
+            td
+              a href="#{line_item[:tcg_link]}" target="_blank" Ver en TCG
+            td #{user.first_name} #{user.last_name} (#{user.phone})
   p.text-warning La previsualización de cartas no tiene en cuenta la edición.  
