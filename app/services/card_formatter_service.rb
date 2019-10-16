@@ -20,7 +20,7 @@ class CardFormatterService
       end
       {
         amount: amount.to_i,
-        card: unparsed,
+        card: unparsed.titleize,
         deckbox_link: deckbox_link(unparsed),
         tcg_link: tcg_link(unparsed),
         notes: notes
