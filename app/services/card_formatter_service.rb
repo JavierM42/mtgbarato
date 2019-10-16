@@ -10,13 +10,13 @@ class CardFormatterService
       unparsed = line
       amount = 1
       notes = nil
-      if with_amount = line.match(/(?<amount>[0-9]+)x (?<rest>.*)/)
+      if with_notes = line.match(/(?<rest>.*) \((?<notes>.*)\)/)
+        notes = with_notes[:notes]
+        unparsed = with_notes[:rest]
+      end
+      if with_amount = unparsed.match(/(?<amount>[0-9]+)x (?<rest>.*)/)
         amount = with_amount[:amount]
         unparsed = with_amount[:rest]
-      end
-      if with_notes = line.match(/(?<name>.*) \((?<notes>.*)\)/)
-        notes = with_notes[:notes]
-        unparsed = with_notes[:name]
       end
       {
         amount: amount.to_i,
