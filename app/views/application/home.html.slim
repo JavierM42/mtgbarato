@@ -1,11 +1,36 @@
 .text-center
   h1 Listas de compra/venta a precio TCG Market Price
-  - @users.each do |user|
-    p.text-success #{user.first_name} #{user.last_name} (#{user.phone})
-    .row
-      .col-xs-6
-        p.text-warning Compra
-        p #{simple_format user.buy}
-      .col-xs-6
-        p.text-warning Vende
-        p #{simple_format user.sell}
+  p La previsualización de carta no tiene en cuenta la edición.  
+  h2 Cartas en venta
+  table.sortable-theme-light.w-full data-sortable=""
+    thead
+      th Vende
+      th Cantidad
+      th Carta
+      th Notas
+    tbody
+      - @users.each do |user|
+        - user.formatted_sell.each do |line_item|
+          tr
+            td #{user.first_name} #{user.last_name} (#{user.phone})
+            td #{line_item[:amount]}
+            td
+              a href="#{line_item[:link]}" #{line_item[:card]}
+            td #{line_item[:notes]}
+
+  h2 Cartas buscadas
+  table.sortable-theme-light.w-full data-sortable=""
+    thead
+      th Busca
+      th Cantidad
+      th Carta
+      th Notas
+    tbody
+      - @users.each do |user|
+        - user.formatted_buy.each do |line_item|
+          tr
+            td #{user.first_name} #{user.last_name} (#{user.phone})
+            td #{line_item[:amount]}
+            td
+              a href="#{line_item[:link]}" #{line_item[:card]}
+            td #{line_item[:notes]}
