@@ -1,9 +1,11 @@
-h2 Mi Lista de Venta
-p.italic Una carta por línea. Podés agregar la cantidad con un x al principio y/o comentarios entre paréntesis al final.
-p.italic Ej.: 4x Tarmogoyf (de future sight)
-= form_tag sell_update_path
- = text_area_tag 'sell', @sell, class: 'col-xs-12', style: 'height: 300px'
- = submit_tag 'Actualizar mi lista de venta'
+section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
+  h2.text-4xl.text-orange-700.font-bold.mb-4 Mi Lista de Compra
+  p.italic.text-lg.text-gray-800 Una carta por línea. Podés agregar la cantidad con un x al principio y/o comentarios entre paréntesis al final.
+  p.italic.text-lg.text-gray-800.mb-2 Ej.: 4x Tarmogoyf (de future sight)
+  = form_tag sell_update_path
+  = text_area_tag 'sell', @sell, class: 'bg-white focus:outline-none focus:shadow-outline border border-gray-400 rounded py-2 px-4 block w-full appearance-none leading-normal h-64', style: 'height: 300px'
+  = submit_tag 'Actualizar mi lista de venta', class: 'my-4 w-full bg-orange-500 text-white font-bold text-2xl border-b-4 p-4 border-orange-900 hover:bg-orange-400'
 
-h2 Cartas buscadas en la comunidad
-= render partial: 'components/catalog', locals: {line_items: @sought_cards, user_header: 'Busca'}
+section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
+  h2.text-4xl.text-orange-700.font-bold.mb-4 Cartas buscadas en la comunidad
+  = render partial: 'components/catalog', locals: {line_items: @sought_cards, user_header: 'Busca'}

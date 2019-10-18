@@ -1,12 +1,12 @@
-ul class="nav navbar-nav"
+ul.nav.navbar-nav.text-orange-900
   li= link_to('<span class="glyphicon glyphicon-home"></span> Home'.html_safe, root_path)
-  li= link_to('Comprar', buy_path)
-  li= link_to('Vender', sell_path)
-  li= link_to('<span class="glyphicon glyphicon-user"></span> Info'.html_safe, info_path)
+  li= link_to('<span class="glyphicon glyphicon-arrow-down"></span> Comprar'.html_safe, buy_path)
+  li= link_to('<span class="glyphicon glyphicon-arrow-up"></span> Vender'.html_safe, sell_path)
+  li= link_to('<span class="glyphicon glyphicon-question-sign"></span> Acerca del sitio'.html_safe, info_path)
   - if current_user
-    li= link_to('<span class="glyphicon glyphicon-cog"></span> Perfil'.html_safe, edit_user_registration_path)
+    li= link_to('<span class="glyphicon glyphicon-user"></span> Mi Perfil'.html_safe, edit_user_registration_path)
 
-ul class="nav navbar-nav navbar-right"
+ul.nav.navbar-nav.navbar-right.text-orange-900
   - if current_user
     li= link_to('<span class="glyphicon glyphicon-off"></span> Cerrar sesión'.html_safe, destroy_user_session_path, method: 'delete')
   - else

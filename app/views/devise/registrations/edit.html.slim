@@ -1,8 +1,5 @@
 = content_for :title do
-  = 'Perfil'
-
-.text-center
-  h1 Perfil
+  = 'Mi Perfil'
 
 .row
   .col-lg-offset-3.col-lg-6.col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8.col-xs-12
@@ -52,4 +49,4 @@
             i= ' (para confirmar cambios)'
             = f.password_field(:current_password, autocomplete: 'off', placeholder: 'Current password', class: 'form-control')
 
-          = f.submit('Actualizar', class: 'btn btn-primary btn-block')
+          = f.submit('Actualizar', class: 'my-4 w-full bg-orange-500 text-white font-bold text-2xl border-b-4 p-4 border-orange-900 hover:bg-orange-400')

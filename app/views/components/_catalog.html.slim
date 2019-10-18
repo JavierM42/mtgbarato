@@ -10,11 +10,11 @@ table.sortable-theme-light.w-full data-sortable=""
       tr
         td #{line_item[:amount]}
         td
-          a href="#{line_item[:deckbox_link]}" #{line_item[:card_name]}
+          a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="#{line_item[:deckbox_link]}" #{line_item[:card_name]}
           - if line_item[:notes]
-            div.italic.text-small #{line_item[:notes]}
+            div.italic.text-lg #{line_item[:notes]}
         td 
-          a href="#{line_item[:tcg_link]}" target="_blank" Ver en TCG
+          a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="#{line_item[:tcg_link]}" target="_blank" Ver en TCG
         td
-          div #{line_item[:user].first_name} #{line_item[:user].last_name} 
-          div.italic.text-small #{line_item[:user].phone}
+          div.text-gray-600 #{line_item[:user].first_name} #{line_item[:user].last_name} 
+          div.italic.text-lg.text-gray-800 #{line_item[:user].phone}

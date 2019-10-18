@@ -1,8 +1,5 @@
 = content_for :title do
-  = 'Registration'
-
-.text-center
-  h1 Register here
+  = 'Registro'
 
 .row
   .col-lg-offset-3.col-lg-6.col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8.col-xs-12
@@ -40,9 +37,9 @@
           .form-group
             = f.label(:password_confirmation, "Confirmación de contraseña")
             = f.password_field(:password_confirmation, autocomplete: 'off', placeholder: 'Password confirmation', class: 'form-control')
-          = f.submit('Registrarme', class: 'btn btn-primary btn-block')
+          = f.submit('Registrarme', class: 'my-4 w-full bg-orange-500 text-white font-bold text-2xl border-b-4 p-4 border-orange-900 hover:bg-orange-400')
 
       .panel-footer
         p
-          = 'Ya registrado? Iniciá sesión '
-          = link_to('acá', new_user_session_path)
+          = 'Ya registrado? '
+          = link_to('Iniciá sesión', new_user_session_path, class: 'text-orange-500 hover:text-orange-400')
