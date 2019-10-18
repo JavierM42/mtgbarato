@@ -20,12 +20,12 @@ class CatalogService
         unparsed = with_amount[:rest]
       end
       {
-        amount: amount.to_i,
+        user: @user,
         card_name: unparsed.titleize,
+        amount: amount.to_i,
         deckbox_link: deckbox_link(unparsed),
         tcg_link: tcg_link(unparsed),
-        notes: notes,
-        user: @user
+        notes: notes
       }
     end
   end

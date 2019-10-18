@@ -4,7 +4,8 @@ table.sortable-theme-light.w-full data-sortable=""
     th Carta
     th Notas
     th Precio TCG
-    th user_header
+    th
+      = user_header
   tbody
     - line_items.each do |line_item|
       tr
