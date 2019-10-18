@@ -32,16 +32,6 @@
             = f.text_field(:phone, placeholder: '095 555 555', class: 'form-control')
 
           .form-group
-            = f.label(:buy, "Qué buscás?")
-            i= ' formato: Nx Nombre de carta (notas)'
-            = f.text_area(:buy, placeholder: "usá este formato:\n2x Black Lotus\n1x Mox Sapphire (mordido por el perro)", class: 'form-control', style: "height: 400px")
-
-          .form-group
-            = f.label(:sell, "Qué vendés?")
-            i= ' formato: Nx Nombre de carta (notas)'
-            = f.text_area(:sell, placeholder: "usá este formato:\n4x Goblin Guide\n4x Sacred Foundry (guilds of ravnica, en portugués)", class: 'form-control', style: "height: 400px")
-
-          .form-group
             = f.label(:password, "Contraseña")
             - if @minimum_password_length
               em= " (mínimo #{@minimum_password_length} caracteres)"

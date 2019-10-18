@@ -1,8 +1,8 @@
 = content_for :title do
-  = 'Configuración'
+  = 'Perfil'
 
 .text-center
-  h1 Configuración
+  h1 Perfil
 
 .row
   .col-lg-offset-3.col-lg-6.col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8.col-xs-12
@@ -30,16 +30,6 @@
           .form-group
             = f.label(:phone, "Celular")
             = f.text_field(:phone, placeholder: '095 555 555', class: 'form-control')
-
-          .form-group
-            = f.label(:buy, "Qué buscás?")
-            i= ' formato: Nx Nombre de carta (notas)'
-            = f.text_area(:buy, placeholder: "usá este formato:\n2x Black Lotus\n1x Mox Sapphire (mordido por el perro)", class: 'form-control', style: "height: 400px")
-
-          .form-group
-            = f.label(:sell, "Qué vendés?")
-            i= ' formato: Nx Nombre de carta (notas)'
-            = f.text_area(:sell, placeholder: "usá este formato:\n4x Goblin Guide\n4x Sacred Foundry (guilds of ravnica, en portugués)", class: 'form-control', style: "height: 400px")
 
           - if devise_mapping.confirmable? && resource.pending_reconfirmation?
             .form-group= "Currently waiting confirmation for: #{resource.unconfirmed_email}"

@@ -1,12 +1,13 @@
 require 'uri'
 
-class CardFormatterService
-  def initialize(text)
-    @text = text
+class CatalogService
+  def initialize(user, raw_text)
+    @raw_text = raw_text
+    @user = user
   end
 
-  def format
-    @text.split(/\n/).map do |line|
+  def create_catalog
+    @raw_text.split(/\n/).map do |line|
       unparsed = line
       amount = 1
       notes = nil
@@ -20,10 +21,11 @@ class CardFormatterService
       end
       {
         amount: amount.to_i,
-        card: unparsed.titleize,
+        card_name: unparsed.titleize,
         deckbox_link: deckbox_link(unparsed),
         tcg_link: tcg_link(unparsed),
-        notes: notes
+        notes: notes,
+        user: @user
       }
     end
   end

@@ -1,0 +1,9 @@
+h2 Mi Lista de Compra
+p.italic Una carta por línea. Podés agregar la cantidad con un x al principio y/o comentarios entre paréntesis al final.
+p.italic Ej.: 4x Tarmogoyf (de future sight)
+= form_tag buy_update_path
+ = text_area_tag 'buy', @buy, class: 'col-xs-12', style: 'height: 300px'
+ = submit_tag 'Actualizar mi lista de compra'
+
+h2 Cartas disponibles en la comunidad
+= render partial: 'components/catalog', locals: {line_items: @available_cards, user_header: 'Vende'}

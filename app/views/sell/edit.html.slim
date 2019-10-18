@@ -1,0 +1,9 @@
+h2 Mi Lista de Venta
+p.italic Una carta por línea. Podés agregar la cantidad con un x al principio y/o comentarios entre paréntesis al final.
+p.italic Ej.: 4x Tarmogoyf (de future sight)
+= form_tag sell_update_path
+ = text_area_tag 'sell', @sell, class: 'col-xs-12', style: 'height: 300px'
+ = submit_tag 'Actualizar mi lista de venta'
+
+h2 Cartas buscadas en la comunidad
+= render partial: 'components/catalog', locals: {line_items: @sought_cards, user_header: 'Busca'}

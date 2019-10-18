@@ -4,13 +4,9 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:home, :info, :contact]
 
   def home
-    @users = User.all
   end
 
   def info
-  end
-
-  def contact
   end
 
   protected

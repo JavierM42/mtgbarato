@@ -4,11 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def formatted_buy
-    CardFormatterService.new(buy).format
+  def buy_catalog
+    CatalogService.new(self, buy).create_catalog
   end
 
-  def formatted_sell
-    CardFormatterService.new(sell).format
+  def sell_catalog
+    CatalogService.new(self, sell).create_catalog
   end
 end

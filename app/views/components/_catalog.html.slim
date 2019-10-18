@@ -1,0 +1,17 @@
+table.sortable-theme-light.w-full data-sortable=""
+  thead
+    th Cantidad
+    th Carta
+    th Notas
+    th Precio TCG
+    th user_header
+  tbody
+    - line_items.each do |line_item|
+      tr
+        td #{line_item[:amount]}
+        td
+          a href="#{line_item[:deckbox_link]}" #{line_item[:card_name]}
+        td #{line_item[:notes]}
+        td 
+          a href="#{line_item[:tcg_link]}" target="_blank" Ver en TCG
+        td #{line_item[:user].first_name} #{line_item[:user].last_name} (#{line_item[:user].phone})
