@@ -6,7 +6,12 @@ class CardService
 
   def find_or_create_card
     if scryfall_data
-      existing_card || Card.create(name: scryfall_data[:name], price: scryfall_data[:price], set_name: scryfall_data[:set_name])
+      existing_card || Card.create(name: scryfall_data[:name],
+                                   price: scryfall_data[:price],
+                                   set_name: scryfall_data[:set_name],
+                                   thumbnail_uri: scryfall_data[:thumbnail_uri],
+                                   image_uri: scryfall_data[:image_uri]
+                                  )
     end
   end
 

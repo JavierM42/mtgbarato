@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191019141827) do
+ActiveRecord::Schema.define(version: 20191019165451) do
 
   create_table "buy_listings", force: :cascade do |t|
     t.integer "card_id"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20191019141827) do
     t.string "name"
     t.string "set_name"
     t.float  "price"
+    t.string "image_uri"
+    t.string "thumbnail_uri"
   end
 
   create_table "sell_listings", force: :cascade do |t|

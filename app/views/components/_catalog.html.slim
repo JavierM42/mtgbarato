@@ -1,5 +1,6 @@
 table.sortable-theme-light.w-full data-sortable=""
   thead
+    th
     th Cantidad
     th Carta
     th Precio TCG
@@ -11,19 +12,21 @@ table.sortable-theme-light.w-full data-sortable=""
   tbody
     - listings.each do |listing|
       tr
+        td
+          img.w-32 src="#{listing.card.thumbnail_uri}"
         td #{listing.amount}
         td
           a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="https://deckbox.org/mtg/#{URI.escape(listing.card.name)}" #{listing.card.name}
-          - if listing.class.name == SellListing.name && listing.set_confirmed || listing.class.name == BuyListing.name && listing.specific_set
-              div.italic.text-lg #{listing.card.set_name}
+          div.text-lg.italic
+            - if listing.class.name == SellListing.name && !listing.set_confirmed
+              span Edición no especificada. Mostrando 
+            - if listing.class.name == BuyListing.name && !listing.specific_set
+              span Edición buscada no especificada, mostrando
+            span #{listing.card.set_name}
           - if listing.notes
-            div.italic.text-lg #{listing.notes}
+            div.text-xl #{listing.notes}
         td 
           div #{listing.card.price}
-          - if listing.class.name == SellListing.name && !listing.set_confirmed
-              div.text-lg edición disponible no confirmada, precio mostrado para #{listing.card.set_name}
-          - elsif listing.class.name == BuyListing.name && !listing.specific_set
-              div.text-lg edición buscada no especificada, precio mostrado para #{listing.card.set_name}
           a class="text-lg text-orange-600 hover:text-orange-400 cursor-pointer" href="https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{listing.card.name.gsub(" ", "+")}&orientation=list" target="_blank" Ver detalle de precios en TCG
         td
           div.text-gray-600 #{listing.user.first_name} #{listing.user.last_name} 
