@@ -5,7 +5,7 @@ class ScryfallSearchService
   end
 
   def search
-    response = HTTParty.get("https://api.scryfall.com/cards/search?q=#{query}sort=usd")
+    response = HTTParty.get("https://api.scryfall.com/cards/search?q=#{URI.encode(query)}")
     if response.code == 200
       json_response = JSON.parse(response.body)
       if json_response["data"] && card_data = json_response["data"][0]

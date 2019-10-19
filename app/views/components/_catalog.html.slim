@@ -19,17 +19,12 @@ table.sortable-theme-light.w-full data-sortable=""
           - if listing.notes
             div.italic.text-lg #{listing.notes}
         td 
-          - if listing.class.name == SellListing.name
-            - if listing.set_confirmed
-              div #{listing.card.price}
-            - else
-              div.text-xl desde #{listing.card.price}, edición no confirmada
-          - else
-            - if listing.specific_set
-              div #{listing.card.price}
-            - else
-              div.text-xl desde #{listing.card.price}, edición no especificada
-          a class="text-lg text-orange-600 hover:text-orange-400 cursor-pointer" href="https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{listing.card.name.gsub(" ", "+")}&orientation=list" target="_blank" Ver en TCG
+          div #{listing.card.price}
+          - if listing.class.name == SellListing.name && !listing.set_confirmed
+              div.text-lg edición disponible no confirmada, precio mostrado para #{listing.card.set_name}
+          - elsif listing.class.name == BuyListing.name && !listing.specific_set
+              div.text-lg edición buscada no especificada, precio mostrado para #{listing.card.set_name}
+          a class="text-lg text-orange-600 hover:text-orange-400 cursor-pointer" href="https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{listing.card.name.gsub(" ", "+")}&orientation=list" target="_blank" Ver detalle de precios en TCG
         td
           div.text-gray-600 #{listing.user.first_name} #{listing.user.last_name} 
           div.italic.text-lg.text-gray-800 #{listing.user.phone}
