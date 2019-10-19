@@ -8,11 +8,11 @@ Rails.application.routes.draw do
   get '/info', to: 'application#info', as: 'info'
   get '/contact', to: 'application#contact', as: 'contact'
   
-  get '/buy', to: 'buy#index', as: 'buy'
+  get '/buy', to: 'buy_controller#index', as: 'buy'
   get '/buy/edit', to: 'buy#edit', as: 'buy_edit'
   post '/buy/edit', to: 'buy#update', as: 'buy_update'
 
-  get '/sell', to: 'sell#index', as: 'sell'
+  get '/sell', to: 'sell_controller#index', as: 'sell'
   get '/sell/edit', to: 'sell#edit', as: 'sell_edit'
   post '/sell/edit', to: 'sell#update', as: 'sell_update'
 end
