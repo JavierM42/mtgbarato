@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191019165451) do
+ActiveRecord::Schema.define(version: 20191019172049) do
 
   create_table "buy_listings", force: :cascade do |t|
     t.integer "card_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20191019165451) do
     t.integer "amount"
     t.string  "notes"
     t.boolean "specific_set", default: false
+    t.boolean "foil",         default: false
     t.index ["card_id"], name: "index_buy_listings_on_card_id"
     t.index ["user_id"], name: "index_buy_listings_on_user_id"
   end
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 20191019165451) do
     t.float  "price"
     t.string "image_uri"
     t.string "thumbnail_uri"
+    t.float  "foil_price"
   end
 
   create_table "sell_listings", force: :cascade do |t|
@@ -43,6 +45,7 @@ ActiveRecord::Schema.define(version: 20191019165451) do
     t.integer "amount"
     t.string  "notes"
     t.boolean "set_confirmed", default: false
+    t.boolean "foil",          default: false
     t.index ["card_id"], name: "index_sell_listings_on_card_id"
     t.index ["user_id"], name: "index_sell_listings_on_user_id"
   end

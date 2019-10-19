@@ -12,6 +12,7 @@ class ScryfallSearchService
         {
           name: card_data['name'],
           price: card_data['prices']['usd'],
+          foil_price: card_data['prices']['usd_foil'],
           set_name: card_data['set_name'],
           thumbnail_uri: card_data['image_uris']['small'],
           image_uri: card_data['image_uris']['png']
