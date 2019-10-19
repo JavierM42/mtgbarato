@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191019115258) do
+ActiveRecord::Schema.define(version: 20191019141827) do
+
+  create_table "buy_listings", force: :cascade do |t|
+    t.integer "card_id"
+    t.integer "user_id"
+    t.integer "amount"
+    t.string  "notes"
+    t.boolean "specific_set", default: false
+    t.index ["card_id"], name: "index_buy_listings_on_card_id"
+    t.index ["user_id"], name: "index_buy_listings_on_user_id"
+  end
 
   create_table "buys", force: :cascade do |t|
     t.integer "amount",    default: 1, null: false

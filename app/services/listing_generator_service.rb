@@ -1,6 +1,7 @@
 class ListingGeneratorService
-  def initialize(raw_text)
+  def initialize(raw_text, class_name)
     @raw_text = raw_text
+    @class_name = class_name
   end
 
   def generate_listings
@@ -24,7 +25,11 @@ class ListingGeneratorService
       name = unparsed
 
       if card = CardService.new(name: name, set_name: set_name).find_or_create_card
-        SellListing.new(card: card, amount: amount, notes: notes, set_confirmed: set_name != nil)
+        if @class_name.name == SellListing.name
+          SellListing.new(card: card, amount: amount, notes: notes, set_confirmed: set_name != nil)
+        else
+          BuyListing.new(card: card, amount: amount, notes: notes, specific_set: set_name != nil)
+        end
       else
         raise CardNotFoundError.new("#{name} no parece ser una carta válida")
       end

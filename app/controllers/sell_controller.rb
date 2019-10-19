@@ -4,24 +4,24 @@ class SellController < ApplicationController
   def index
     redirect_to sell_edit_path and return if current_user
 
-    @sought_cards = User.all.map { |user| user.buy_catalog }.flatten
+    @buy_listings = BuyListing.all
 
     render
   end
 
   def edit
-    @sought_cards = User.all.map { |user| user.buy_catalog }.flatten
+    @buy_listings = BuyListing.all
     @sell = current_user.sell
 
     render
   end
 
   def update
-    @sought_cards = User.all.map { |user| user.buy_catalog }.flatten
+    @buy_listings = BuyListing.all
 
     @sell = params[:sell]
     begin
-      new_sell_listings = ListingGeneratorService.new(params[:sell]).generate_listings
+      new_sell_listings = ListingGeneratorService.new(params[:sell], SellListing).generate_listings
       current_user.sell_listings.destroy_all
       current_user.sell_listings = new_sell_listings
       current_user.sell = @sell
