@@ -10,7 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191014215009) do
+ActiveRecord::Schema.define(version: 20191019115258) do
+
+  create_table "buys", force: :cascade do |t|
+    t.integer "amount",    default: 1, null: false
+    t.string  "card_name"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_buys_on_user_id"
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.string "name"
+    t.string "set_name"
+    t.float  "price"
+  end
+
+  create_table "sell_listings", force: :cascade do |t|
+    t.integer "card_id"
+    t.integer "user_id"
+    t.integer "amount"
+    t.string  "notes"
+    t.boolean "set_confirmed", default: false
+    t.index ["card_id"], name: "index_sell_listings_on_card_id"
+    t.index ["user_id"], name: "index_sell_listings_on_user_id"
+  end
+
+  create_table "sells", force: :cascade do |t|
+    t.integer "amount",    default: 1, null: false
+    t.string  "card_name"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_sells_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

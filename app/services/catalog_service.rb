@@ -19,12 +19,15 @@ class CatalogService
         amount = with_amount[:amount]
         unparsed = with_amount[:rest]
       end
+      scryfall_data = ScryfallSearchService.new(unparsed).search
       {
         user: @user,
         card_name: unparsed.titleize,
         amount: amount.to_i,
         deckbox_link: deckbox_link(unparsed),
         tcg_link: tcg_link(unparsed),
+        price: scryfall_data[:price],
+        set_name: scryfall_data[:set_name],
         notes: notes
       }
     end

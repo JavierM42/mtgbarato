@@ -18,11 +18,18 @@ class SellController < ApplicationController
 
   def update
     @sought_cards = User.all.map { |user| user.buy_catalog }.flatten
+
     @sell = params[:sell]
-    current_user.sell = @sell
-    current_user.save
-    
-    flash[:notice] = 'Tu lista de venta fue actualizada. Podés ver la publicación en la pestaña Comprar'
+    begin
+      current_user.sell_listings = ListingGeneratorService.new(params[:sell]).generate_listings
+      current_user.sell = @sell
+      current_user.save
+      flash[:alert] = nil
+      flash[:notice] = 'Tu lista de venta fue actualizada. Podés ver todas las publicaciones en la pestaña Comprar'
+    rescue CardNotFoundError => e
+      flash[:alert] = e.message
+    end
+
     render :edit
   end
 end

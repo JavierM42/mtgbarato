@@ -1,0 +1,1 @@
+class CardNotFoundError < StandardError; end
