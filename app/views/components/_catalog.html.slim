@@ -13,23 +13,23 @@ table.sortable-theme-light.w-full data-sortable=""
     - listings.each do |listing|
       tr
         td
-          img.w-32 src="#{listing.card.thumbnail_uri}"
+          img.w-20 src="#{listing.card.thumbnail_uri}"
         td #{listing.amount}
         td
           a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="https://deckbox.org/mtg/#{URI.escape(listing.card.name)}" #{listing.card.name}
           - if listing.foil
-            span.text-xl.uppercase.font-bold.tracking-wider  FOIL
-          div.text-lg.italic
+            span.text-sm.uppercase.font-bold.tracking-wider  FOIL
+          div.text-xs.italic
             - if listing.class.name == SellListing.name && !listing.set_confirmed
               span Edición no especificada. Mostrando 
             - if listing.class.name == BuyListing.name && !listing.specific_set
               span Edición buscada no especificada, mostrando 
             span #{listing.card.set_name}
           - if listing.notes
-            div.text-xl #{listing.notes}
+            div.text-sm #{listing.notes}
         td 
-          div #{listing.foil ? listing.card.foil_price : listing.card.price}
-          a class="text-lg text-orange-600 hover:text-orange-400 cursor-pointer" href="https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{listing.card.name.gsub(" ", "+")}&orientation=list" target="_blank" Ver detalle de precios en TCG
+          div.text-lg.font-bold.text-gray-800 #{listing.foil ? listing.card.foil_price : listing.card.price}
+          a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{listing.card.name.gsub(" ", "+")}&orientation=list" target="_blank" Ver detalle de precios en TCG
         td
           div.text-gray-600 #{listing.user.first_name} #{listing.user.last_name} 
-          div.italic.text-lg.text-gray-800 #{listing.user.phone}
+          div.italic.text-gray-800.text-xs #{listing.user.phone}

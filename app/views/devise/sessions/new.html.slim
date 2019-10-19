@@ -1,30 +1,30 @@
 = content_for :title do
   = 'Iniciar sesión'
 
-.row
-  .col-lg-offset-3.col-lg-6.col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8.col-xs-12
-    .panel.panel-default
-      .panel-body
+.w-full.flex.justify-center
+  div class="w-full md:w-1/2"
+    .bg-gray-100.border.border-gray-300.rounded
+      .px-2.py-4
         = form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: 'form'}) do |f|
           = devise_error_messages!
 
-          .form-group
+          . class="form-group md:px-2"
             = f.label :email
             = f.email_field :email, autofocus: true, placeholder: 'hello@youremail.com', class: 'form-control input-lg'
 
-          .form-group
+          . class="form-group md:px-2"
             = f.label :password, 'Contraseña'
             = f.password_field :password, autocomplete: 'off', placeholder: 'Password', class: 'form-control input-lg'
 
           - if devise_mapping.rememberable?
-            .form-group
+            . class="form-group md:px-2"
               label
                 = f.check_box :remember_me
                 = ' Recordarme'
 
-          = f.submit 'Iniciar sesión', class: 'my-4 w-full bg-orange-500 text-white font-bold text-2xl border-b-4 p-4 border-orange-900 hover:bg-orange-400'
+          = f.submit 'Iniciar sesión', class: 'my-1 w-full bg-orange-500 text-white font-bold border-b-4 px-4 py-2 border-orange-900 hover:bg-orange-400'
 
-      .panel-footer
+      .p-4.border-t.border-gray-300
         p
           = 'Sos nuevo? '
           = link_to 'Registrate', new_user_registration_path, class: 'text-orange-500 hover:text-orange-400'

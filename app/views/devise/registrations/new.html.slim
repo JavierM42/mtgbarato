@@ -1,45 +1,45 @@
 = content_for :title do
   = 'Registro'
 
-.row
-  .col-lg-offset-3.col-lg-6.col-md-offset-3.col-md-6.col-sm-offset-2.col-sm-8.col-xs-12
-    .panel.panel-default
-      .panel-body
+.w-full.flex.justify-center
+  div class="w-full md:w-1/2"
+    .bg-gray-100.border.border-gray-300.rounded
+      .px-2.py-4
         = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { role: 'form'}) do |f|
 
           - unless resource.errors.empty?
             .alert.alert-warning
               = devise_error_messages!
 
-          .row
-            .form-group.col-lg-6
+          .flex.flex-wrap
+            . class="form-group w-full md:w-1/2 md:px-2"
               = f.label(:first_name, "Nombre")
-              = f.text_field(:first_name, autofocus: true, placeholder: 'First name', class: 'form-control')
+              = f.text_field(:first_name, autofocus: true, placeholder: 'Nombre', class: 'form-control')
 
-            .form-group.col-lg-6
+            . class="form-group w-full md:w-1/2 md:px-2"
               = f.label(:last_name, "Apellido")
-              = f.text_field(:last_name, placeholder: 'Last name', class: 'form-control')
+              = f.text_field(:last_name, placeholder: 'Apellido', class: 'form-control')
 
-          .form-group
+          . class="form-group md:px-2"
             = f.label(:email)
-            = f.email_field(:email, placeholder: 'Hello@youremail.com', class: 'form-control')
+            = f.email_field(:email, placeholder: 'stomping_ground@foil.ru', class: 'form-control')
 
-          .form-group
+          . class="form-group md:px-2"
             = f.label(:phone, "Celular")
             = f.text_field(:phone, placeholder: '095 555 555', class: 'form-control')
 
-          .form-group
+          . class="form-group md:px-2"
             = f.label(:password, "Contraseña")
             - if @minimum_password_length
               em= " (mínimo #{@minimum_password_length} caracteres)"
-            = f.password_field(:password, autocomplete: 'off', placeholder: 'Password', class: 'form-control')
+            = f.password_field(:password, autocomplete: 'off', placeholder: 'Contraseña', class: 'form-control')
 
-          .form-group
+          . class="form-group md:px-2"
             = f.label(:password_confirmation, "Confirmación de contraseña")
-            = f.password_field(:password_confirmation, autocomplete: 'off', placeholder: 'Password confirmation', class: 'form-control')
-          = f.submit('Registrarme', class: 'my-4 w-full bg-orange-500 text-white font-bold text-2xl border-b-4 p-4 border-orange-900 hover:bg-orange-400')
+            = f.password_field(:password_confirmation, autocomplete: 'off', placeholder: 'Confirmación de contraseña', class: 'form-control')
+          = f.submit('Registrarme', class: 'my-1 w-full bg-orange-500 text-white font-bold border-b-4 px-4 py-2 border-orange-900 hover:bg-orange-400')
 
-      .panel-footer
+      .p-4.border-t.border-gray-300
         p
           = 'Ya registrado? '
           = link_to('Iniciá sesión', new_user_session_path, class: 'text-orange-500 hover:text-orange-400')
