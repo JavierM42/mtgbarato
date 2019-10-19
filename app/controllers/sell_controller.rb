@@ -21,7 +21,9 @@ class SellController < ApplicationController
 
     @sell = params[:sell]
     begin
-      current_user.sell_listings = ListingGeneratorService.new(params[:sell]).generate_listings
+      new_sell_listings = ListingGeneratorService.new(params[:sell]).generate_listings
+      current_user.sell_listings.destroy_all
+      current_user.sell_listings = new_sell_listings
       current_user.sell = @sell
       current_user.save
       flash[:alert] = nil

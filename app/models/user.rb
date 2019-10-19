@@ -20,7 +20,8 @@ class User < ApplicationRecord
         tcg_link: "https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{listing.card.name.gsub(" ", "+")}&orientation=list",
         price: listing.card.price,
         set_name: listing.card.set_name,
-        notes: listing.notes
+        notes: listing.notes,
+        set_confirmed: listing.set_confirmed
       }
     end
   end

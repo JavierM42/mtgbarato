@@ -1,17 +1,28 @@
 class ScryfallSearchService
-  def initialize(query)
-    @query = query
+  def initialize(name:, set_name: nil)
+    @name = name
+    @set_name = set_name
   end
 
   def search
-    response = HTTParty.get("https://api.scryfall.com/cards/named?fuzzy=#{@query.gsub(" ", "+")}")
+    response = HTTParty.get("https://api.scryfall.com/cards/search?q=#{query}")
     if response.code == 200
       json_response = JSON.parse(response.body)
-      {
-        name: json_response['name'],
-        price: json_response['prices']['usd'],
-        set_name: json_response['set_name']
-      }
+      if json_response["data"] && card_data = json_response["data"][0]
+        {
+          name: card_data['name'],
+          price: card_data['prices']['usd'],
+          set_name: card_data['set_name']
+        }
+      end
     end
+  end
+
+  def query
+    query = @name
+    if @set_name
+      query += " set:'#{@set_name}'"
+    end
+    query
   end
 end
