@@ -2,7 +2,7 @@ require 'uri'
 
 class CatalogService
   def initialize(user, raw_text)
-    @raw_text = raw_text
+    @raw_text = raw_text || ""
     @user = user
   end
 
