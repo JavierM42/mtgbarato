@@ -4,20 +4,20 @@ class BuyController < ApplicationController
   def index
     redirect_to buy_edit_path and return if current_user
 
-    @sell_listings = SellListing.all
+    @sell_listings = SellListing.all.shuffle
 
     render
   end
 
   def edit
-    @sell_listings = SellListing.all
+    @sell_listings = SellListing.all.shuffle
     @buy = current_user.buy
     
     render
   end
 
   def update
-    @sell_listings = SellListing.all
+    @sell_listings = SellListing.all.shuffle
     
     @buy = params[:buy]
     begin
