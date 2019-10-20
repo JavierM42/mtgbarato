@@ -1,4 +1,13 @@
 table.sortable-theme-light.w-full.js-datatable
+  div.flex.justify-end.my-2
+    div.mx-2
+      label.text-gray-700 for="minPrice" Mostrar cartas con precio desde
+      input.w-12.border.border-gray-300.text-right.mx-1 id="minPrice" name="minPrice" value="0"
+      span.text-gray-700.text-sm.font-bold USD 
+    div.mx-2
+      label.text-gray-700 for="maxPrice" hasta
+      input.w-12.border.border-gray-300.text-right.mx-1 id="maxPrice" name="maxPrice" value="20000"
+      span.text-gray-700.text-sm.font-bold USD 
   thead
     th
     th Cantidad
@@ -38,3 +47,52 @@ table.sortable-theme-light.w-full.js-datatable
           - else
             div.text-gray-600 #{listing.user.first_name} #{listing.user.last_name} 
             div.italic.text-gray-800.text-xs #{listing.user.phone}
+        /hidden columns
+        td #{listing.foil ? listing.card.foil_price : listing.card.price}
+
+|
+  <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script>
+    // price filters
+    jQuery.fn.dataTableExt.afnFiltering.push(
+      function( oSettings, aData, iDataIndex ) {
+        var iColumn = 5; //hidden raw price column
+        var iMin = document.getElementById('minPrice').value * 1;
+        var iMax = document.getElementById('maxPrice').value * 1;
+
+        var iVersion = aData[iColumn] == "-" ? 0 : aData[iColumn]*1;
+        if ( iMin === "" && iMax === "" )
+        {
+          return true;
+        }
+        else if ( iMin === "" && iVersion < iMax )
+        {
+          return true;
+        }
+        else if ( iMin < iVersion && "" === iMax )
+        {
+          return true;
+        }
+        else if ( iMin < iVersion && iVersion < iMax )
+        {
+          return true;
+        }
+        return false;
+      }
+    );
+  </script> 
+  <script>
+    $(document).ready( function () {
+        var table = $('.js-datatable').DataTable( {
+          order: [[ 2, "asc" ]],
+          language: {
+            url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+          },
+          columnDefs: [
+            { "targets": [ 5 ], "visible": false }
+          ]
+        });
+        $('#minPrice').keyup( function() { table.draw(); } );
+        $('#maxPrice').keyup( function() { table.draw(); } );
+    } );
+  </script>
