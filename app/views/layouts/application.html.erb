@@ -10,7 +10,7 @@
 
 		<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="/sortable-theme-light.css" />
+		<link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
   </head>
 
   <body>
@@ -42,6 +42,16 @@
 	  </div>
 
 		<script src="https://deckbox.org/assets/external/tooltip.js"></script>
-		<script src="/sortable.min.js"></script>		
+		<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js	"></script>	
+		<script>
+			$(document).ready( function () {
+					$('.js-datatable').DataTable( {
+						order: [[ 2, "asc" ]],
+						language: {
+							url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+						}
+					});
+			} );
+		</script>
   </body>
 </html>

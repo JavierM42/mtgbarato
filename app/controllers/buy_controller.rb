@@ -4,13 +4,13 @@ class BuyController < ApplicationController
   def index
     redirect_to buy_edit_path and return if current_user
 
-    @sell_listings = SellListing.all.shuffle
+    @sell_listings = SellListing.all
 
     render
   end
 
   def edit
-    @sell_listings = SellListing.all.shuffle
+    @sell_listings = SellListing.all
     @buy = current_user.buy
     @matches = ListingMatcherService.new(current_user.buy_listings).match(SellListing)
     
@@ -18,7 +18,7 @@ class BuyController < ApplicationController
   end
 
   def update
-    @sell_listings = SellListing.all.shuffle
+    @sell_listings = SellListing.all
 
     @buy = params[:buy]
     begin

@@ -1,4 +1,4 @@
-table.sortable-theme-light.w-full data-sortable=""
+table.sortable-theme-light.w-full.js-datatable
   thead
     th
     th Cantidad
@@ -15,7 +15,7 @@ table.sortable-theme-light.w-full data-sortable=""
         td
           img.w-20 src="#{listing.card.thumbnail_uri}"
         td #{listing.amount}
-        td
+        td data-sort="#{listing.card.name}"
           a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="https://deckbox.org/mtg/#{URI.escape(listing.card.name)}" #{listing.card.name}
           - if listing.foil
             span.text-sm.uppercase.font-bold.tracking-wider  FOIL
@@ -27,7 +27,7 @@ table.sortable-theme-light.w-full data-sortable=""
             span #{listing.card.set_name}
           - if listing.notes
             div.text-sm #{listing.notes}
-        td 
+        td data-sort="#{listing.foil ? listing.card.foil_price : listing.card.price}"
           div
             span.text-gray-700.text-sm.font-bold USD 
             span.text-gray-800.text-xl #{listing.foil ? listing.card.foil_price : listing.card.price}
