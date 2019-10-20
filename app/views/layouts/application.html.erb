@@ -43,5 +43,53 @@
 
 	  <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 		<script src="https://deckbox.org/assets/external/tooltip.js"></script>
+		<script>
+			// price filters
+			jQuery.fn.dataTableExt.afnFiltering.push(
+				function( oSettings, aData, iDataIndex ) {
+					var iColumn = 4; //hidden raw price column
+					var iMin = document.getElementById('minPrice').value * 1;
+					var iMax = document.getElementById('maxPrice').value * 1;
+
+					var iVersion = aData[iColumn] == "-" ? 0 : aData[iColumn]*1;
+					if ( iMin === "" && iMax === "" )
+					{
+						return true;
+					}
+					else if ( iMin === "" && iVersion < iMax )
+					{
+						return true;
+					}
+					else if ( iMin < iVersion && "" === iMax )
+					{
+						return true;
+					}
+					else if ( iMin < iVersion && iVersion < iMax )
+					{
+						return true;
+					}
+					return false;
+				}
+			);
+		</script> 
+		<script>
+			$(document).ready( function () {
+					var table = $('.js-datatable').DataTable( {
+						autoWidth: false,
+						order: [[ 2, "asc" ]],
+						language: {
+							url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+						},
+						columnDefs: [
+							{ "targets": [ 0 ], "sortable": false, "searchable": false },
+							{ "targets": [ 3 ], "sortable": false, "searchable": true },
+							{ "targets": [ 4 ], "visible": false },
+							{ "targets": [ 5 ], "visible": false }
+						]
+					});
+					$('#minPrice').keyup( function() { table.draw(); } );
+					$('#maxPrice').keyup( function() { table.draw(); } );
+			} );
+		</script>
   </body>
 </html>
