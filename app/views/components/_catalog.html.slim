@@ -33,7 +33,7 @@ table.sortable-theme-light.w-full data-sortable=""
             span.text-gray-800.text-xl #{listing.foil ? listing.card.foil_price : listing.card.price}
           a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{listing.card.name.gsub(" ", "+")}&orientation=list" target="_blank" Ver detalle de precios en TCG
         td
-          - if current_user = listing.user
+          - if current_user == listing.user
             div.text-gray-600 Yo
           - else
             div.text-gray-600 #{listing.user.first_name} #{listing.user.last_name} 
