@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191019172049) do
+ActiveRecord::Schema.define(version: 20191020230753) do
 
   create_table "buy_listings", force: :cascade do |t|
     t.integer "card_id"
@@ -31,12 +31,14 @@ ActiveRecord::Schema.define(version: 20191019172049) do
   end
 
   create_table "cards", force: :cascade do |t|
-    t.string "name"
-    t.string "set_name"
-    t.float  "price"
-    t.string "image_uri"
-    t.string "thumbnail_uri"
-    t.float  "foil_price"
+    t.string  "name"
+    t.string  "set_name"
+    t.float   "price"
+    t.string  "image_uri"
+    t.string  "thumbnail_uri"
+    t.float   "foil_price"
+    t.boolean "standard_legal", default: false
+    t.boolean "modern_legal",   default: false
   end
 
   create_table "sell_listings", force: :cascade do |t|

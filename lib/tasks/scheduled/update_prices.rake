@@ -6,6 +6,8 @@ namespace :scheduled do
       if scryfall_data
         card.price = scryfall_data[:price]
         card.foil_price = scryfall_data[:foil_price]
+        card.standard_legal = scryfall_data[:standard_legal]
+        card.modern_legal = scryfall_data[:modern_legal]
         card.save
       end
     end

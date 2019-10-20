@@ -15,7 +15,9 @@ class ScryfallSearchService
           foil_price: card_data['prices']['usd_foil'],
           set_name: card_data['set_name'],
           thumbnail_uri: card_data['image_uris']['small'],
-          image_uri: card_data['image_uris']['png']
+          image_uri: card_data['image_uris']['png'],
+          standard_legal: card_data['legalities']['standard'] == 'legal',
+          modern_legal: card_data['legalities']['modern'] == 'legal'
         }
       end
     end
@@ -24,7 +26,7 @@ class ScryfallSearchService
   def query
     query = @name
     if @set_name
-      query += " set:'#{@set_name}'"
+      query += " set:\"#{@set_name}'\""
     end
     query
   end

@@ -10,7 +10,9 @@ class CardService
                                    price: scryfall_data[:price],
                                    set_name: scryfall_data[:set_name],
                                    thumbnail_uri: scryfall_data[:thumbnail_uri],
-                                   image_uri: scryfall_data[:image_uri]
+                                   image_uri: scryfall_data[:image_uri],
+                                   standard_legal: scryfall_data[:standard_legal],
+                                   modern_legal: scryfall_data[:modern_legal],
                                   )
     end
   end
