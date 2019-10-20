@@ -12,6 +12,7 @@ class SellController < ApplicationController
   def edit
     @buy_listings = BuyListing.all.shuffle
     @sell = current_user.sell
+    @matches = ListingMatcherService.new(current_user.sell_listings).match(BuyListing)
 
     render
   end
@@ -32,6 +33,7 @@ class SellController < ApplicationController
       flash[:alert] = e.message
     end
 
+    @matches = ListingMatcherService.new(current_user.sell_listings).match(BuyListing)
     render :edit
   end
 end
