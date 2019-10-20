@@ -1,4 +1,4 @@
-table.sortable-theme-light.w-full.js-datatable
+table.sortable-theme-light.w-full.js-datatable.compact.stripe.hover.row-border
   .flex.justify-end.my-2
     .mx-2
       label.text-gray-700 for="minPrice" Mostrar cartas con precio desde
@@ -11,7 +11,6 @@ table.sortable-theme-light.w-full.js-datatable
   .flex.justify-end.my-2.text-gray-700 Para filtrar por formato podés buscar 'modern' o 'standard'
   thead
     th
-    th Cantidad
     th Carta
     th Precio TCG
     th
@@ -22,11 +21,11 @@ table.sortable-theme-light.w-full.js-datatable
   tbody
     - listings.each do |listing|
       tr
-        td
-          img.w-20 src="#{listing.card.thumbnail_uri}"
-        td #{listing.amount}
+        td.w-16 class="md:w-20"
+          img.w-full src="#{listing.card.thumbnail_uri}"
         td data-sort="#{listing.card.name}"
-          a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="https://deckbox.org/mtg/#{URI.escape(listing.card.name)}" #{listing.card.name}
+          span.text-sm.text-gray-700.font-bold.mr-1 #{listing.amount}x
+          a.text-lg.text-orange-600.cursor-pointer class="hover:text-orange-400" href="https://deckbox.org/mtg/#{URI.escape(listing.card.name)}" #{listing.card.name}
           - if listing.foil
             span.text-sm.uppercase.font-bold.tracking-wider  FOIL
           div.text-xs.italic
@@ -59,7 +58,7 @@ table.sortable-theme-light.w-full.js-datatable
     // price filters
     jQuery.fn.dataTableExt.afnFiltering.push(
       function( oSettings, aData, iDataIndex ) {
-        var iColumn = 5; //hidden raw price column
+        var iColumn = 4; //hidden raw price column
         var iMin = document.getElementById('minPrice').value * 1;
         var iMax = document.getElementById('maxPrice').value * 1;
 
@@ -93,8 +92,10 @@ table.sortable-theme-light.w-full.js-datatable
             url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
           },
           columnDefs: [
-            { "targets": [ 5 ], "visible": false },
-            { "targets": [ 6 ], "visible": false }
+            { "targets": [ 0 ], "sortable": false, "searchable": false },
+            { "targets": [ 3 ], "sortable": false, "searchable": true },
+            { "targets": [ 4 ], "visible": false },
+            { "targets": [ 5 ], "visible": false }
           ]
         });
         $('#minPrice').keyup( function() { table.draw(); } );

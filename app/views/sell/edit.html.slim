@@ -1,7 +1,7 @@
 - if @matches.count > 0
   section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
     h2.text-2xl.text-orange-700.font-bold.mb-4 Hay usuarios buscando tus cartas
-    div.flex
+    div.flex.flex-wrap
       - @matches.each do |listing|
         div.w-48.rounded-lg.border.border-gray-300.bg-orange-100.p-2.m-1
           div.flex.justify-center
