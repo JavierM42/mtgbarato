@@ -39,7 +39,7 @@ table.sortable-theme-light.w-full.js-datatable.compact.stripe.hover.row-border
         td data-sort="#{listing.foil ? listing.card.foil_price : listing.card.price}"
           div
             span.text-gray-700.text-sm.font-bold USD 
-            span.text-gray-800.text-xl #{listing.foil ? listing.card.foil_price : listing.card.price}
+            span.text-gray-800.text-xl #{(listing.foil ? listing.card.foil_price : listing.card.price) || '?'}
           a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{listing.card.name.gsub(" ", "+")}&orientation=list" target="_blank" Ver detalle de precios en TCG
         td
           - if current_user == listing.user
@@ -48,5 +48,5 @@ table.sortable-theme-light.w-full.js-datatable.compact.stripe.hover.row-border
             div.text-gray-600 #{listing.user.first_name} #{listing.user.last_name} 
             div.italic.text-gray-800.text-xs #{listing.user.phone}
         /hidden columns
-        td #{listing.foil ? listing.card.foil_price : listing.card.price}
+        td #{(listing.foil ? listing.card.foil_price : listing.card.price) || 0.00001}
         td #{listing.card.standard_legal ? 'standard' : ''} #{listing.card.modern_legal ? 'modern' : ''}
