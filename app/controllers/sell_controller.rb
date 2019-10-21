@@ -25,7 +25,6 @@ class SellController < ApplicationController
       new_sell_listings = TextToListingService.new(params[:sell_listings_text], SellListing).parse
       current_user.sell_listings.destroy_all
       current_user.sell_listings = new_sell_listings
-      current_user.sell = @sell_listings_text
       current_user.save
       flash[:alert] = nil
       flash[:notice] = 'Tu lista de venta fue actualizada. Podés ver todas las publicaciones en la pestaña Comprar'
