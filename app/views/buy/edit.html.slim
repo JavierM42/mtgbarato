@@ -47,7 +47,7 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
         th Notas
         th.w-20
         th.w-20
-      - @sell_listings.each do |listing|
+      - @buy_listings.each do |listing|
         = render partial: 'components/listing_update_form', locals: {listing: listing, path: buy_listing_path(listing.id)}
       = render partial: 'components/listing_create_form', locals: {path: buy_listings_path}
 
