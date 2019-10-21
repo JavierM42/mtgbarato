@@ -16,7 +16,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap/custom
-//= require turbolinks
 //= require_tree .
 
 document.addEventListener("turbolinks:load", function() {
