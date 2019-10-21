@@ -29,13 +29,52 @@
           div.italic.text-gray-800.text-xs #{listing.user.phone}
 
 section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
-  h2.text-2xl.text-orange-700.font-bold.mb-4 Mi Lista de Compra
-  p.italic.text-gray-800 Una carta por línea. Podés agregar la cantidad con un x al principio, la edición entre paréntesis, *F* si es foil y/o comentarios entre guión bajo al final.
-  p.italic.text-gray-800.mb-2 Ej.: 2x Tarmogoyf (future sight) *F* _pateados_
-  = form_tag buy_update_path
-  = text_area_tag 'buy_listings_text', @buy_listings_text, class: 'bg-white focus:outline-none focus:shadow-outline border border-gray-400 rounded py-2 px-4 block w-full appearance-none leading-normal h-64', style: 'height: 300px'
-  = submit_tag 'Actualizar mi lista de compra', class: 'my-1 w-full bg-orange-500 text-white font-bold border-b-4 px-4 py-2 border-orange-900 hover:bg-orange-400'
+  .flex.justify-between
+    h2.text-2xl.text-orange-700.font-bold.mb-4 Mi Lista de Compra
+    .flex
+      button id="js-list-mode-toggle" class='rounded-l-lg bg-gray-300 text-white px-4 py-2 hover:bg-orange-400 bg-orange-500' onclick="listMode()"
+        img.w-6.h-6 src="/list.svg"
+      div.w-0-h-6.border-r.border-gray-700
+      button id="js-text-mode-toggle" class='rounded-r-lg bg-gray-300 text-white px-4 py-2 hover:bg-orange-400' onclick="textMode()"
+        img.w-6.h-6 src="/text.svg"
+
+  #js-list-mode
+    table.w-full
+      thead
+        th.w-24 Cantidad
+        th Carta
+        th Edición
+        th Foil?
+        th Notas
+        th.w-20
+        th.w-20
+      - @sell_listings.each do |listing|
+        = render partial: 'components/listing_update_form', locals: {listing: listing, path: buy_listing_path(listing.id)}
+      = render partial: 'components/listing_create_form', locals: {path: buy_listings_path}
+
+  #js-text-mode.hidden
+    p.italic.text-gray-800 Una carta por línea. Podés agregar la cantidad con un x al principio, la edición entre paréntesis, *F* si es foil y/o comentarios entre guión bajo al final.
+    p.italic.text-gray-800.mb-2 Ej.: 2x Tarmogoyf (future sight) *F* _pateados_
+    = form_tag buy_update_path
+    = text_area_tag 'buy_listings_text', @buy_listings_text, class: 'bg-white focus:outline-none focus:shadow-outline border border-gray-400 rounded py-2 px-4 block w-full appearance-none leading-normal h-64', style: 'height: 300px'
+    = submit_tag 'Actualizar mi lista de compra', class: 'my-1 w-full bg-orange-500 text-white font-bold border-b-4 px-4 py-2 border-orange-900 hover:bg-orange-400'
 
 section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
   h2.text-2xl.text-orange-700.font-bold.mb-4 Cartas disponibles en la comunidad
   = render partial: 'components/listings_table', locals: {listings: @sell_listings}
+
+|
+  <script>
+    function listMode() {
+      document.getElementById('js-list-mode').classList.remove('hidden');
+      document.getElementById('js-text-mode').classList.add('hidden');
+      document.getElementById('js-list-mode-toggle').classList.add('bg-orange-500');
+      document.getElementById('js-text-mode-toggle').classList.remove('bg-orange-500');
+    }
+    function textMode() {
+      document.getElementById('js-list-mode').classList.add('hidden');
+      document.getElementById('js-text-mode').classList.remove('hidden');
+      document.getElementById('js-list-mode-toggle').classList.remove('bg-orange-500');
+      document.getElementById('js-text-mode-toggle').classList.add('bg-orange-500');
+    }
+  </script>

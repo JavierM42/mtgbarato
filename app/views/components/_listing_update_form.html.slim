@@ -1,0 +1,17 @@
+tr
+  = form_tag path, method: :patch, class: 'flex'
+    td.px-2
+      = number_field_tag 'amount', listing.amount, min: 1, step: 1, class: 'w-full rounded border border-gray-300 p-2 text-right'
+    td.px-2
+      .text-base.text-gray-700 #{listing.card.name}
+    td.px-2
+      = text_field_tag 'set_name', listing.set_confirmed || listing.specific_set ? listing.card.set_name : '', class: 'w-full rounded border border-gray-300 p-2'
+    td.px-2
+      = check_box_tag 'foil', 'foil', listing.foil
+    td.px-2
+      = text_field_tag 'notes', listing.notes, class: 'w-full rounded border border-gray-300 p-2'
+    td.px-2
+      = submit_tag 'Actualizar', class: 'w-full my-1 bg-green-600 text-white font-bold border-b-4 px-4 py-2 border-green-900 hover:bg-green-500'
+  td
+    = form_tag path, method: :delete
+      = submit_tag 'Eliminar', class: 'w-full my-1 bg-red-600 text-white font-bold border-b-4 px-4 py-2 border-red-900 hover:bg-red-500'

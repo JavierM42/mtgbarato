@@ -15,4 +15,7 @@ Rails.application.routes.draw do
   get '/sell', to: 'sell#index', as: 'sell'
   get '/sell/edit', to: 'sell#edit', as: 'sell_edit'
   post '/sell/edit', to: 'sell#update', as: 'sell_update'
+
+  resources :sell_listings, only: [:create, :update, :destroy]
+  resources :buy_listings, only: [:create, :update, :destroy]
 end

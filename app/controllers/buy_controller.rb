@@ -11,6 +11,7 @@ class BuyController < ApplicationController
 
   def edit
     @sell_listings = SellListing.all
+    @buy_listings = current_user.buy_listings
     @buy_listings_text = ListingToTextService.new(current_user.buy_listings).parse
     @matches = ListingMatcherService.new(current_user.buy_listings).match(SellListing)
     
