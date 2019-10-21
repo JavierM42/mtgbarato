@@ -33,6 +33,7 @@ class SellController < ApplicationController
       flash[:alert] = e.message
     end
 
+    @sell_listings = current_user.sell_listings
     @matches = ListingMatcherService.new(current_user.sell_listings).match(BuyListing)
     render :edit
   end
