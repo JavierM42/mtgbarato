@@ -11,7 +11,7 @@ class BuyController < ApplicationController
 
   def edit
     @sell_listings = SellListing.all
-    @buy = current_user.buy
+    @buy_listings_text = ListingToTextService.new(current_user.buy_listings).parse
     @matches = ListingMatcherService.new(current_user.buy_listings).match(SellListing)
     
     render
@@ -20,12 +20,12 @@ class BuyController < ApplicationController
   def update
     @sell_listings = SellListing.all
 
-    @buy = params[:buy]
+    @buy_listings_text = params[:buy_listings_text]
     begin
-      new_buy_listings = ListingGeneratorService.new(params[:buy], BuyListing).generate_listings
+      new_buy_listings = TextToListingService.new(params[:buy_listings_text], BuyListing).parse
       current_user.buy_listings.destroy_all
       current_user.buy_listings = new_buy_listings
-      current_user.buy = @buy
+      current_user.buy = @buy_listings_text
       current_user.save
       flash[:alert] = nil
       flash[:notice] = 'Tu lista de compra fue actualizada. Podés ver la publicación en la pestaña Vender'

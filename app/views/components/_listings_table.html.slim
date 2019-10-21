@@ -29,9 +29,9 @@ table.sortable-theme-light.w-full.js-datatable.compact.stripe.hover.row-border
           - if listing.foil
             span.text-sm.uppercase.font-bold.tracking-wider  FOIL
           div.text-xs.italic
-            - if listing.class.name == SellListing.name && !listing.set_confirmed
+            - if listing.set_not_confirmed
               span Edición no especificada. Mostrando 
-            - if listing.class.name == BuyListing.name && !listing.specific_set
+            - if listing.any_set
               span Edición buscada no especificada, mostrando 
             span #{listing.card.set_name}
           - if listing.notes

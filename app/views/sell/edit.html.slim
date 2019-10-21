@@ -14,9 +14,9 @@
               span.text-sm.uppercase.font-bold.tracking-wider.px-1 FOIL
           div.flex.justify-center
             div.text-xs.italic
-              - if listing.class.name == SellListing.name && !listing.set_confirmed
+              - if listing.set_not_confirmed
                 span Edición no especificada. Mostrando 
-              - if listing.class.name == BuyListing.name && !listing.specific_set
+              - if listing.any_set
                 span Edición buscada no especificada, mostrando 
               span #{listing.card.set_name}
           - if listing.notes
@@ -33,7 +33,7 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
   p.italic.text-gray-800 Una carta por línea. Podés agregar la cantidad con un x al principio, la edición entre paréntesis, *F* si es foil y/o comentarios entre guión bajo al final.
   p.italic.text-gray-800.mb-2 Ej.: 2x Tarmogoyf (future sight) *F* _pateados_
   = form_tag sell_update_path
-  = text_area_tag 'sell', @sell, class: 'bg-white focus:outline-none focus:shadow-outline border border-gray-400 rounded py-2 px-4 block w-full appearance-none leading-normal h-64', style: 'height: 300px'
+  = text_area_tag 'sell_listings_text', @sell_listings_text, class: 'bg-white focus:outline-none focus:shadow-outline border border-gray-400 rounded py-2 px-4 block w-full appearance-none leading-normal h-64', style: 'height: 300px'
   = submit_tag 'Actualizar mi lista de venta', class: 'my-1 w-full bg-orange-500 text-white font-bold border-b-4 px-4 py-2 border-orange-900 hover:bg-orange-400'
 
 section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border

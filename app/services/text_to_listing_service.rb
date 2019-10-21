@@ -1,10 +1,10 @@
-class ListingGeneratorService
+class TextToListingService
   def initialize(raw_text, class_name)
     @raw_text = raw_text
     @class_name = class_name
   end
 
-  def generate_listings
+  def parse
     @raw_text.split(/\n/).map do |line|
       unparsed = line
       amount = 1
