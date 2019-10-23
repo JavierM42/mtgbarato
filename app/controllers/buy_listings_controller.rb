@@ -3,7 +3,6 @@ class BuyListingsController < ApplicationController
 
   def index
     @buy_listings = current_user.buy_listings
-    @buy_listings_text = ListingToTextService.new(current_user.buy_listings).parse
 
     render
   end

@@ -13,6 +13,11 @@ Rails.application.routes.draw do
 
   resources :sell_listings, only: [:index, :create, :update, :destroy]
   resources :buy_listings, only: [:index, :create, :update, :destroy]
-  resources :sell_listings_collection, only: [:update]
-  resources :buy_listings_collection, only: [:update]
+  
+  get '/sell_listings_collection', to: 'sell_listings_collection#index', as: 'sell_listings_collection'
+  put '/sell_listings_collection', to: 'sell_listings_collection#update', as: 'sell_listings_collection_update'
+
+
+  get '/buy_listings_collection', to: 'buy_listings_collection#index', as: 'buy_listings_collection'
+  put '/buy_listings_collection', to: 'buy_listings_collection#update', as: 'buy_listings_collection_update'
 end

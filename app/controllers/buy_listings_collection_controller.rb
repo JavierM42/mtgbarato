@@ -1,6 +1,12 @@
 class BuyListingsCollectionController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @buy_listings_text = ListingToTextService.new(current_user.buy_listings).parse
+    
+    render
+  end
+
   def update
     @sell_listings = SellListing.all
 
