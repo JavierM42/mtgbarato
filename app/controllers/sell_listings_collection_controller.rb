@@ -1,22 +1,5 @@
-class SellController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
-
-  def index
-    redirect_to sell_edit_path and return if current_user
-
-    @buy_listings = BuyListing.all
-
-    render
-  end
-
-  def edit
-    @buy_listings = BuyListing.all
-    @sell_listings = current_user.sell_listings
-    @sell_listings_text = ListingToTextService.new(current_user.sell_listings).parse
-    @matches = ListingMatcherService.new(current_user.sell_listings).match(BuyListing)
-
-    render
-  end
+class SellListingsCollectionController < ApplicationController
+  before_action :authenticate_user!
 
   def update
     @buy_listings = BuyListing.all
@@ -35,6 +18,6 @@ class SellController < ApplicationController
 
     @sell_listings = current_user.sell_listings
     @matches = ListingMatcherService.new(current_user.sell_listings).match(BuyListing)
-    render :edit
+    render 'sell_listings/index'
   end
 end

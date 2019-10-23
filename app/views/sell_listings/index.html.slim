@@ -1,33 +1,3 @@
-- if @matches.count > 0
-  section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
-    h2.text-2xl.text-orange-700.font-bold.mb-4 Hay usuarios buscando tus cartas
-    div.flex.flex-wrap
-      - @matches.each do |listing|
-        div.w-48.rounded-lg.border.border-gray-300.bg-orange-100.p-2.m-1
-          div.flex.justify-center
-            img.w-20 src="#{listing.card.thumbnail_uri}"
-          div.flex.justify-center
-            - if listing.amount > 1
-              span.text-sm.px-1 #{listing.amount}x
-            a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="https://deckbox.org/mtg/#{URI.escape(listing.card.name)}" #{listing.card.name}
-            - if listing.foil
-              span.text-sm.uppercase.font-bold.tracking-wider.px-1 FOIL
-          div.flex.justify-center
-            div.text-xs.italic
-              - if listing.set_not_confirmed
-                span Edición no especificada. Mostrando 
-              - if listing.any_set
-                span Edición buscada no especificada, mostrando 
-              span #{listing.card.set_name}
-          - if listing.notes
-            div.text-sm #{listing.notes}
-          div
-            span.text-gray-700.text-sm.font-bold USD 
-            span.text-gray-800.text-xl #{listing.foil ? listing.card.foil_price : listing.card.price} 
-            a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{listing.card.name.gsub(" ", "+")}&orientation=list" target="_blank" Ver detalle de precios en TCG
-          div.text-gray-600 #{listing.user.first_name} #{listing.user.last_name} 
-          div.italic.text-gray-800.text-xs #{listing.user.phone}
-
 section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
   .flex.justify-between
     h2.text-2xl.text-orange-700.font-bold.mb-4 Mi Lista de venta
@@ -54,14 +24,9 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
   #js-text-mode.hidden
     p.italic.text-gray-800 Una carta por línea. Podés agregar la cantidad con un x al principio, la edición entre paréntesis, *F* si es foil y/o comentarios entre guión bajo al final.
     p.italic.text-gray-800.mb-2 Ej.: 2x Tarmogoyf (future sight) *F* _pateados_
-    = form_tag sell_update_path
+    = form_tag sell_listings_collection_path(current_user.id), method: :put
     = text_area_tag 'sell_listings_text', @sell_listings_text, class: 'bg-white focus:outline-none focus:shadow-outline border border-gray-400 rounded py-2 px-4 block w-full appearance-none leading-normal h-64', style: 'height: 300px'
     = submit_tag 'Actualizar mi lista de venta', class: 'my-1 w-full bg-orange-500 text-white font-bold border-b-4 px-4 py-2 border-orange-900 hover:bg-orange-400'
-
-section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
-  h2.text-2xl.text-orange-700.font-bold.mb-4 Cartas buscadas en la comunidad
-  = render partial: 'components/listings_table', locals: {listings: @buy_listings}
-
 
 |
   <script>

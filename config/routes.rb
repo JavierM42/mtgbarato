@@ -8,14 +8,11 @@ Rails.application.routes.draw do
   get '/info', to: 'application#info', as: 'info'
   get '/contact', to: 'application#contact', as: 'contact'
   
-  get '/buy', to: 'buy#index', as: 'buy'
-  get '/buy/edit', to: 'buy#edit', as: 'buy_edit'
-  post '/buy/edit', to: 'buy#update', as: 'buy_update'
+  get '/sell_catalog', to: 'sell_catalog#index', as: 'sell_catalog'
+  get '/buy_catalog', to: 'buy_catalog#index', as: 'buy_catalog'
 
-  get '/sell', to: 'sell#index', as: 'sell'
-  get '/sell/edit', to: 'sell#edit', as: 'sell_edit'
-  post '/sell/edit', to: 'sell#update', as: 'sell_update'
-
-  resources :sell_listings, only: [:create, :update, :destroy]
-  resources :buy_listings, only: [:create, :update, :destroy]
+  resources :sell_listings, only: [:index, :create, :update, :destroy]
+  resources :buy_listings, only: [:index, :create, :update, :destroy]
+  resources :sell_listings_collection, only: [:update]
+  resources :buy_listings_collection, only: [:update]
 end

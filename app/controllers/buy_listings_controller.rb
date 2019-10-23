@@ -1,6 +1,13 @@
 class BuyListingsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @buy_listings = current_user.buy_listings
+    @buy_listings_text = ListingToTextService.new(current_user.buy_listings).parse
+
+    render
+  end
+
   def create
     params[:set_name] = nil unless params[:set_name].present?
 
@@ -20,12 +27,12 @@ class BuyListingsController < ApplicationController
       else
         flash[:alert] = "Error: #{params[:name]} no parece ser una carta válida"
       end
-      redirect_to buy_edit_path and return
+      redirect_to buy_listings_path and return
     end
 
     listing.save
     flash[:notice] = "#{listing.card.name} fue agregado a tu lista de compra"
-    redirect_to buy_edit_path
+    redirect_to buy_listings_path
   end
 
   def update
@@ -39,7 +46,7 @@ class BuyListingsController < ApplicationController
         listing.card = card
       else
         flash[:alert] = "Error: #{listing.card.name} no existe en el set #{params[:set_name]}"
-        redirect_to buy_edit_path and return
+        redirect_to buy_listings_path and return
       end
     end
 
@@ -48,7 +55,7 @@ class BuyListingsController < ApplicationController
     listing.foil = params[:foil] == 'foil'
     listing.save
     flash[:notice] = "#{listing.card.name} fue actualizado en tu lista de compra"
-    redirect_to buy_edit_path
+    redirect_to buy_listings_path
   end
 
   def destroy
@@ -56,6 +63,6 @@ class BuyListingsController < ApplicationController
     listing.destroy
 
     flash[:notice] = "#{listing.card.name} fue eliminado de tu lista de compra"
-    redirect_to buy_edit_path
+    redirect_to buy_listings_path
   end
 end
