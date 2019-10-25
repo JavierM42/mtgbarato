@@ -44,9 +44,10 @@ table.sortable-theme-light.w-full.js-datatable.compact.stripe.hover.row-border
         td
           - if listing.user.email == 'dsfoodandgames@gmail.com'
             .flex.items-center
-              = image_tag 'dragonstone.jpg', class: 'h-16 mr-2'
+              a href="https://www.facebook.com/Dragonstonefoodygames/" target="_blank"
+                = image_tag 'dragonstone.jpg', class: 'h-12 mr-2'
               .
-                .text-gray-600 Dragon Stone
+                a.text-gray-600 href="https://www.facebook.com/Dragonstonefoodygames/" target="_blank" Dragon Stone
                 div.italic.text-gray-800.text-xs #{listing.user.phone}
           - elsif current_user == listing.user
             div.text-gray-600 Yo
