@@ -3,14 +3,43 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
     h2.text-2xl.text-orange-700.font-bold.mb-4 Mi Lista de Compra
     = link_to 'Ingresar en modo texto', buy_listings_collection_path, class: 'text-orange-500'
 
-  table.w-full
+  .flex.justify-end
+    = link_to "Agregar carta", new_buy_listing_path, class: 'block text-center w-32 bg-green-600 text-white font-bold border-b-4 px-2 py-2 border-green-900 hover:bg-green-500', remote: true
+
+  table.sortable-theme-light.w-full.js-datatable.compact.stripe.hover.row-border
+    .flex.justify-end.my-2
+      .mx-2
+        label.text-gray-700 for="minPrice" Mostrar cartas con precio desde
+        input.w-12.border.border-gray-300.text-right.mx-1 id="minPrice" name="minPrice" value="0"
+        span.text-gray-700.text-sm.font-bold USD 
+      .mx-2
+        label.text-gray-700 for="maxPrice" hasta
+        input.w-12.border.border-gray-300.text-right.mx-1 id="maxPrice" name="maxPrice" value="10000"
+        span.text-gray-700.text-sm.font-bold USD 
+    .flex.justify-end.my-2.text-gray-700 Para filtrar por formato podés buscar 'modern' o 'standard'
     thead
-      th.w-24 Cantidad
+      th
       th Carta
-      th Foil?
-      th Notas
-      th.w-20
-      th.w-20
-    - @buy_listings.each do |listing|
-      = render partial: 'components/listing_update_form', locals: {listing: listing, path: buy_listing_path(listing.id)}
-    = render partial: 'components/listing_create_form', locals: {path: buy_listings_path}
+      th Precio TCG
+      th Acciones
+    tbody
+      - @buy_listings.each do |listing|
+        = render partial: 'components/listing_line_item', locals: {listing: listing, delete_path: buy_listing_path(listing.id), edit_path: edit_buy_listing_path(listing.id)}
+
+.modal.fade id="edit-modal" tabindex="-1" role="dialog" aria-hidden="true"
+  .modal-dialog role="document"
+    .modal-content
+      .flex.border-b.border-gray-300.p-4
+        h5.text-lg.font-bold.flex-1 Editar item de búsqueda
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+      .modal-body
+
+.modal.fade id="new-modal" tabindex="-1" role="dialog" aria-hidden="true"
+  .modal-dialog role="document"
+    .modal-content
+      .flex.border-b.border-gray-300.p-4
+        h5.text-lg.font-bold.flex-1 Nuevo item de búsqueda
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+      .modal-body

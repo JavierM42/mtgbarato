@@ -1,0 +1,16 @@
+= form_tag sell_listing_path(@listing.id), method: :patch
+  .mb-4
+    . Vendo
+    .flex.items-center.my-2
+      = number_field_tag 'amount', @listing.amount, min: 1, step: 1, class: 'w-10 rounded border border-gray-300 p-2 text-right'
+      .text-base.text-gray-700.mx-2 x #{@listing.card.name}
+    .flex.items-center.my-2
+      .text-base.text-gray-700.mx-2 de
+      = text_field_tag 'set_name', @listing.set_confirmed || @listing.specific_set ? @listing.card.set_name : '', class: 'w-full rounded border border-gray-300 p-1 italic', placeholder: 'edición'
+    .flex.my-2
+      = check_box_tag 'foil', 'foil', @listing.foil
+      label.text-gray-700.mx-2 for="foil" Foil
+    .flex.items-center.my-2
+      label.mx-2 for="notes" Notas
+      = text_field_tag 'notes', @listing.notes, class: 'w-full rounded border border-gray-300 p-2'
+  = submit_tag 'Actualizar', class: 'w-full bg-green-600 text-white font-bold border-b-4 px-2 py-1 border-green-900 hover:bg-green-500'

@@ -7,6 +7,10 @@ class SellListingsController < ApplicationController
     render
   end
 
+  def edit
+    @listing = SellListing.find(params[:id])
+  end
+
   def create
     params[:set_name] = nil unless params[:set_name].present?
 

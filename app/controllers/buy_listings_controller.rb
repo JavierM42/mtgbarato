@@ -7,6 +7,10 @@ class BuyListingsController < ApplicationController
     render
   end
 
+  def edit
+    @listing = BuyListing.find(params[:id])
+  end
+
   def create
     params[:set_name] = nil unless params[:set_name].present?
 
