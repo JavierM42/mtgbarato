@@ -7,9 +7,22 @@ class SellListingsCollectionController < ApplicationController
     render
   end
 
-  def update
-    @buy_listings = BuyListing.all
+  def create
+    @sell_listings_text = params[:sell_listings_text]
+    begin
+      new_sell_listings = TextToListingService.new(params[:sell_listings_text], SellListing).parse
+      current_user.sell_listings << new_sell_listings
+      flash[:alert] = nil
+      flash[:notice] = 'Se agregaron items a tu lista de venta.'
+    rescue CardNotFoundError => e
+      flash[:alert] = e.message
+    end
 
+    @sell_listings = current_user.sell_listings
+    render 'sell_listings/index'
+  end
+
+  def update
     @sell_listings_text = params[:sell_listings_text]
     begin
       new_sell_listings = TextToListingService.new(params[:sell_listings_text], SellListing).parse
@@ -17,13 +30,12 @@ class SellListingsCollectionController < ApplicationController
       current_user.sell_listings = new_sell_listings
       current_user.save
       flash[:alert] = nil
-      flash[:notice] = 'Tu lista de venta fue actualizada. Podés ver todas las publicaciones en la pestaña Comprar'
+      flash[:notice] = 'Tu lista de venta fue actualizada.'
     rescue CardNotFoundError => e
       flash[:alert] = e.message
     end
 
     @sell_listings = current_user.sell_listings
-    @matches = ListingMatcherService.new(current_user.sell_listings).match(BuyListing)
     render 'sell_listings/index'
   end
 end
