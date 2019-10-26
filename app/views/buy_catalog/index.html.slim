@@ -1,6 +1,6 @@
 - if @matches && @matches.count > 0
   section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
-    h2.text-2xl.text-orange-700.font-bold.mb-4 Encontramos estas cartas para vos
+    h2.text-2xl.text-orange-700.font-bold.mb-4 Hay usuarios buscando tus cartas
     div.flex.flex-wrap
       - @matches.each do |listing|
         div.w-48.rounded-lg.border.border-gray-300.bg-orange-100.p-2.m-1
@@ -29,5 +29,38 @@
           div.italic.text-gray-800.text-xs #{listing.user.phone}
 
 section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
-  h2.text-2xl.text-orange-700.font-bold.mb-4 Cartas disponibles en la comunidad
-  = render partial: 'components/listings_table', locals: {listings: @sell_listings}
+  h2.text-2xl.text-orange-700.font-bold.mb-4 Cartas buscadas en la comunidad
+
+  table.sortable-theme-light.w-full.compact.stripe.hover.row-border id="buy-catalog-datatable" class="" data-source="#{buy_catalog_path(format: :json)}"
+    thead
+      tr
+        th.w-16
+        th Carta
+        th Precio
+        th Usuario
+    tbody
+
+|
+  <script>
+    $(document).ready(function() {
+      $('#buy-catalog-datatable').DataTable({
+        autoWidth: false,
+        language: {
+          url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+        },
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+          "url": $('#buy-catalog-datatable').data('source')
+        },
+        order: [[ 1, "asc" ]],
+        "pagingType": "full_numbers",
+        "columns": [
+          {"data": "thumbnail_uri", sortable: false},
+          {"data": "card_name"},
+          {"data": "price"},
+          {"data": "user", sortable: false},
+        ]
+      });
+    });
+  </script>

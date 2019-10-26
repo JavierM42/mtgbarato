@@ -13,4 +13,8 @@ class SellListing < ApplicationRecord
   def set_not_confirmed
     !set_confirmed
   end
+  
+  def price
+    foil ? card.foil_price : card.price
+  end
 end

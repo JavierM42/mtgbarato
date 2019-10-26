@@ -13,4 +13,8 @@ class BuyListing < ApplicationRecord
   def any_set
     !specific_set
   end
+
+  def price
+    foil ? card.foil_price : card.price
+  end
 end

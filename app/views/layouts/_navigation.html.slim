@@ -1,7 +1,7 @@
 ul.nav.navbar-nav.text-orange-900
   li= link_to('<span class="glyphicon glyphicon-home"></span> Home'.html_safe, root_path)
-  li= link_to('<span class="glyphicon glyphicon-arrow-down"></span> Cartas en venta'.html_safe, buy_catalog_path)
-  li= link_to('<span class="glyphicon glyphicon-arrow-up"></span> Cartas buscadas'.html_safe, sell_catalog_path)
+  li= link_to('<span class="glyphicon glyphicon-arrow-down"></span> Cartas en venta'.html_safe, sell_catalog_path)
+  li= link_to('<span class="glyphicon glyphicon-arrow-up"></span> Cartas buscadas'.html_safe, buy_catalog_path)
   - if current_user
     li= link_to('<span class="glyphicon glyphicon-arrow-down"></span> Mi lista de compra'.html_safe, buy_listings_path)
     li= link_to('<span class="glyphicon glyphicon-arrow-up"></span> Mi lista de venta'.html_safe, sell_listings_path)

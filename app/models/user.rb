@@ -6,4 +6,8 @@ class User < ApplicationRecord
 
   has_many :sell_listings
   has_many :buy_listings
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

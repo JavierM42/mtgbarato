@@ -1,11 +1,18 @@
 class SellCatalogController < ApplicationController
   def index
-    if current_user
-      @matches = ListingMatcherService.new(current_user.sell_listings).match(BuyListing)
+    respond_to do |format|
+      format.html do
+        if current_user
+          @matches = ListingMatcherService.new(current_user.buy_listings).match(SellListing)
+        end
+
+        @sell_listings = SellListing.all
+        render
+      end
+      
+      format.json do
+        render json: SellListingDatatable.new(params)
+      end
     end
-
-    @buy_listings = BuyListing.all
-
-    render
   end
 end

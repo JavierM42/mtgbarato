@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20191021004853) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "buy_listings", force: :cascade do |t|
     t.integer "card_id"
     t.integer "user_id"
@@ -19,15 +22,15 @@ ActiveRecord::Schema.define(version: 20191021004853) do
     t.string  "notes"
     t.boolean "specific_set", default: false
     t.boolean "foil",         default: false
-    t.index ["card_id"], name: "index_buy_listings_on_card_id"
-    t.index ["user_id"], name: "index_buy_listings_on_user_id"
+    t.index ["card_id"], name: "index_buy_listings_on_card_id", using: :btree
+    t.index ["user_id"], name: "index_buy_listings_on_user_id", using: :btree
   end
 
   create_table "buys", force: :cascade do |t|
     t.integer "amount",    default: 1, null: false
     t.string  "card_name"
     t.integer "user_id"
-    t.index ["user_id"], name: "index_buys_on_user_id"
+    t.index ["user_id"], name: "index_buys_on_user_id", using: :btree
   end
 
   create_table "cards", force: :cascade do |t|
@@ -48,15 +51,15 @@ ActiveRecord::Schema.define(version: 20191021004853) do
     t.string  "notes"
     t.boolean "set_confirmed", default: false
     t.boolean "foil",          default: false
-    t.index ["card_id"], name: "index_sell_listings_on_card_id"
-    t.index ["user_id"], name: "index_sell_listings_on_user_id"
+    t.index ["card_id"], name: "index_sell_listings_on_card_id", using: :btree
+    t.index ["user_id"], name: "index_sell_listings_on_user_id", using: :btree
   end
 
   create_table "sells", force: :cascade do |t|
     t.integer "amount",    default: 1, null: false
     t.string  "card_name"
     t.integer "user_id"
-    t.index ["user_id"], name: "index_sells_on_user_id"
+    t.index ["user_id"], name: "index_sells_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,8 +78,8 @@ ActiveRecord::Schema.define(version: 20191021004853) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
 end
