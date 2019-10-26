@@ -33,7 +33,7 @@ class BuyListingsController < ApplicationController
       redirect_to buy_listings_path and return
     end
 
-    listing.update_price
+    listing.price = listing.calculate_price
     listing.save
     flash[:notice] = "#{listing.card.name} fue agregado a tu lista de compra"
     redirect_to buy_listings_path
@@ -57,7 +57,7 @@ class BuyListingsController < ApplicationController
     listing.amount = params[:amount]
     listing.notes = params[:notes]
     listing.foil = params[:foil] == 'foil'
-    listing.update_price
+    listing.price = listing.calculate_price
     listing.save
     flash[:notice] = "#{listing.card.name} fue actualizado en tu lista de compra"
     redirect_to buy_listings_path
