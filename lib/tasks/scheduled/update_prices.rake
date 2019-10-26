@@ -9,6 +9,14 @@ namespace :scheduled do
         card.standard_legal = scryfall_data[:standard_legal]
         card.modern_legal = scryfall_data[:modern_legal]
         card.save
+        card.sell_listings.each do |listing|
+          listing.update_price
+          listing.save
+        end
+        card.buy_listings.each do |listing|
+          listing.update_price
+          listing.save
+        end
       end
     end
   end

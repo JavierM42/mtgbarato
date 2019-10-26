@@ -14,7 +14,7 @@ class BuyListing < ApplicationRecord
     !specific_set
   end
 
-  def price
-    foil ? card.foil_price : card.price
+  def update_price
+    price = (foil ? card.foil_price : card.price) || 0
   end
 end

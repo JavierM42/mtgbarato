@@ -31,9 +31,9 @@ class TextToListingService
 
       if card = CardService.new(name: name, set_name: set_name).find_or_create_card
         if @class_name.name == SellListing.name
-          SellListing.new(card: card, amount: amount, notes: notes, set_confirmed: set_name != nil, foil: foil)
+          SellListing.new(card: card, amount: amount, notes: notes, set_confirmed: set_name != nil, foil: foil, price: (listing.foil ? card.foil_price : card.price) || 0)
         else
-          BuyListing.new(card: card, amount: amount, notes: notes, specific_set: set_name != nil, foil: foil)
+          BuyListing.new(card: card, amount: amount, notes: notes, specific_set: set_name != nil, foil: foil, price: (listing.foil ? card.foil_price : card.price) || 0)
         end
       else
         raise CardNotFoundError.new("#{name} no parece ser una carta válida")
