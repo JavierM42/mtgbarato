@@ -4,7 +4,8 @@
     .flex.items-center.my-2
       = number_field_tag 'amount', 1, min: 1, step: 1, class: 'w-10 rounded border border-gray-300 p-2 text-right'
       .text-base.text-gray-700.mx-2 x
-      = text_field_tag 'name', '', class: 'w-full rounded border border-gray-300 p-1 italic', placeholder: 'Nombre de carta'
+      .relative.w-full
+        = text_field_tag 'name', '', class: 'js-autocomplete-card w-full rounded border border-gray-300 p-2 italic', placeholder: 'Nombre de carta', autocomplete: 'off'
     .flex.items-center.my-2
       .text-base.text-gray-700.mx-2 de
       = text_field_tag 'set_name', '', class: 'w-full rounded border border-gray-300 p-1 italic', placeholder: 'edición'

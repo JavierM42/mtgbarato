@@ -1,0 +1,35 @@
+new autoComplete({
+  data: {
+    src: async () => {
+     	const query = document.querySelector(".js-autocomplete-card").value;
+     	const source = await fetch(`https://api.scryfall.com/cards/autocomplete?q=${query}`);
+     	const response = await source.json();
+    	return response.data;
+    },
+    cache: false
+  },
+  selector: ".js-autocomplete-card",   // Input field selector              | (Optional)
+  threshold: 2,                        // Min. Chars length to start Engine | (Optional)
+  debounce: 100,                       // Post duration for engine to start | (Optional)
+  resultsList: {                       // Rendered results list object      | (Optional)
+   		render: true,
+      container: (source) => {
+        source.classList.add('absolute', 'border-b', 'w-full', 'bg-white', 'rounded-b', 'border-l', 'border-r');
+        // source.classList.add('absolute bottom-0 right-0 w-full');
+      },
+   		destination: document.querySelector(".js-autocomplete-card"),
+   		element: "ul"
+  },
+  maxResults: 5,                         // Max. number of rendered results | (Optional)
+  highlight: true,                       // Highlight matching results      | (Optional)
+  resultItem: {                          // Rendered result item            | (Optional)
+    content: (data, source) => {
+      source.innerHTML = data.match;
+      source.classList.add('p-2', 'border-t', 'hover:bg-gray-200', 'text-left');
+    },
+    element: "li"
+  },
+  onSelection: feedback => {             // Action script onSelection event | (Optional)
+    document.querySelector('.js-autocomplete-card').value = feedback.selection.value;
+  }
+});
