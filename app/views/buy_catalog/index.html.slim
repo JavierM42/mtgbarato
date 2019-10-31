@@ -30,7 +30,9 @@
 
 section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
   h2.text-2xl.text-orange-700.font-bold.mb-4 Cartas buscadas en la comunidad
-
+  .flex.justify-end.mb-4.text-white
+      button.js-list-view.p-2.border.rounded-l.border-orange-500.font-bold.bg-orange-500 Ver Lista
+      button.js-spoiler-view.p-2.border.rounded-r.border-orange-500.text-orange-500.font-bold Ver Imágenes
   table.sortable-theme-light.w-full.compact.stripe.hover.row-border id="buy-catalog-datatable" class="" data-source="#{buy_catalog_path(format: :json)}"
     thead
       tr
@@ -56,11 +58,42 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
         order: [[ 2, "desc" ]],
         "pagingType": "full_numbers",
         "columns": [
-          {"data": "thumbnail_uri", sortable: false},
-          {"data": "card_name"},
-          {"data": "price"},
-          {"data": "user", sortable: false},
-        ]
+          {"data": "thumbnail_uri", sortable: false, class: 'card-thumbnail'},
+          {"data": "card_name", class: 'card-name'},
+          {"data": "price", class: 'card-price'},
+          {"data": "user", class: 'card-user', sortable: false},
+        ],
+         "drawCallback": function() {
+          $('tr').mouseover(function() {
+            if (document.querySelector('.spoiler-view')) {
+              $(this).children('.card-name').css('opacity', '1');
+              $(this).children('.card-price').css('opacity', '1');
+              $(this).children('.card-user').css('opacity', '1');
+            }
+          });
+          $('tr').mouseout(function() {
+            if (document.querySelector('.spoiler-view')) {
+              $(this).children('.card-name').css('opacity', '');
+              $(this).children('.card-price').css('opacity', '');
+              $(this).children('.card-user').css('opacity', '');
+            }
+          });
+        }
+      });
+
+      $('.js-list-view').click(function() {
+        $('.js-list-view').addClass('bg-orange-500');
+        $('.js-list-view').removeClass('text-orange-500');
+        $('.js-spoiler-view').addClass('text-orange-500');
+        $('.js-spoiler-view').removeClass('bg-orange-500');
+        $('#buy-catalog-datatable').removeClass('spoiler-view');
+      });
+      $('.js-spoiler-view').click(function() {
+        $('.js-list-view').addClass('text-orange-500');
+        $('.js-list-view').removeClass('bg-orange-500');
+        $('.js-spoiler-view').addClass('bg-orange-500');
+        $('.js-spoiler-view').removeClass('text-orange-500');
+        $('#buy-catalog-datatable').addClass('spoiler-view');
       });
     });
   </script>
