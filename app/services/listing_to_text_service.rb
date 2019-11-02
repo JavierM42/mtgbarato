@@ -11,8 +11,9 @@ class ListingToTextService
         name = "#{listing.card.name} "
         set = listing.set_confirmed || listing.specific_set ? "(#{listing.card.set_name}) " : ''
         foil = listing.foil ? "*F* " : ''
-        notes = listing.notes.present? ? "_#{listing.notes}_" : ''
-        amount + name + set + foil + notes
+        notes = listing.notes.present? ? "_#{listing.notes}_ " : ''
+        discount = listing.discount != 0 ? "#{listing.discount}% OFF" : ''
+        amount + name + set + foil + notes + discount
       end
       .join("\n")
   end

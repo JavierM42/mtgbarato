@@ -11,6 +11,11 @@ class TextToListingService
       foil = false
       set_name = nil
       notes = nil
+      discount = 0
+      if with_discount = unparsed.match(/(?<rest>.*) (?<discount>[0-9]+)% (OFF|off|Off)/)
+        discount = with_discount[:discount]
+        unparsed = with_discount[:rest]
+      end
       if with_notes = unparsed.match(/(?<rest>.*) _(?<notes>.*)_/)
         notes = with_notes[:notes]
         unparsed = with_notes[:rest]
@@ -31,9 +36,9 @@ class TextToListingService
 
       if card = CardService.new(name: name, set_name: set_name).find_or_create_card
         if @class_name.name == SellListing.name
-          SellListing.new(card: card, amount: amount, notes: notes, set_confirmed: set_name != nil, foil: foil, discount: 0)
+          SellListing.new(card: card, amount: amount, notes: notes, set_confirmed: set_name != nil, foil: foil, discount: discount)
         else
-          BuyListing.new(card: card, amount: amount, notes: notes, specific_set: set_name != nil, foil: foil, discount: 0)
+          BuyListing.new(card: card, amount: amount, notes: notes, specific_set: set_name != nil, foil: foil, discount: discount)
         end
       else
         raise CardNotFoundError.new("#{name} no parece ser una carta válida")
