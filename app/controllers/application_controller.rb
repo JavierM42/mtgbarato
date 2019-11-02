@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def home
+    @sell_listings_count = SellListing.count
+    @buy_listings_count = BuyListing.count
   end
 
   protected

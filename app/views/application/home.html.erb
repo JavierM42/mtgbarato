@@ -1,8 +1,24 @@
-<div class="flex justify-end items-center mb-4">
-  <div class="text-gray-600 mr-1">Apoya:</div>
-  <a href="https://www.facebook.com/Dragonstonefoodygames/" target="_blank">
-    <%= image_tag('dragonstone.jpg', class: 'w-24' )%>
-  </a>
+<div class="flex flex-wrap text-white uppercase tracking-widest">
+  <div class="w-full lg:w-1/3 py-4 lg:px-4">
+    <div class="flex items-center w-full h-full p-12 rounded-lg mb-4 bg-orange-600">
+      <span class="text-6xl mr-2"><%= @sell_listings_count %></span>
+      <div class="text-xl font-bold">cartas en venta</div>
+    </div>
+  </div>
+
+  <div class="w-full lg:w-1/3 py-4 lg:px-4">
+    <div class="flex items-center w-full h-full p-12 rounded-lg mb-4 bg-orange-400">
+      <span class="text-6xl mr-2"><%= @buy_listings_count %></span>
+      <div class="text-xl font-bold">cartas buscadas</div>
+    </div>
+  </div>
+
+  <div class="flex justify-end items-center w-full lg:w-1/3 py-4 lg:px-4">
+    <div class="text-gray-600 mr-1">Apoya:</div>
+    <a href="https://www.facebook.com/Dragonstonefoodygames/" target="_blank">
+      <%= image_tag('dragonstone.jpg', class: 'w-24' )%>
+    </a>
+  </div>
 </div>
 
 <div class="py-20 rounded-lg mb-4 lg:mx-4" style="background: linear-gradient(90deg, #DD6B20 0%, #F6AD55 100%)">
