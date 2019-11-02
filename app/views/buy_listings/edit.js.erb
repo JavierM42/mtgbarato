@@ -1,2 +1,32 @@
 document.querySelector("#edit-modal .modal-body").innerHTML = "<%= j render "edit"%>";
 $('#edit-modal').modal('show');
+$('.js-fetch-card-data').change(function() {
+  $.ajax({
+    url: `https://api.scryfall.com/cards/search?q=${
+      encodeURI(
+        $('.js-card-name').val() + ($('.js-card-set-name').val() ? ` set:"${$('.js-card-set-name').val().replace(':', '')}"` : '')
+      )
+    }&unique=prints`
+  }).done(function(response) {
+    const cards = response.data.filter(function (card) {
+      if($('.js-card-foil').prop('checked')) {
+        return card.prices.usd_foil;
+      } else {
+        return card.prices.usd;
+      }
+    });
+    if (cards.length > 0) {
+      $('.js-card-previews').html(
+        '<div class="w-full my-2 text-orange font-bold">Previsualización</div>' + 
+        cards.map(function(card) {
+          const price =  $('.js-card-foil').prop('checked') ? card.prices.usd_foil : card.prices.usd; 
+          return `<div class="w-24 bg-gray-100 rounded border border-gray-300 m-2 p-1"><img src="${card.image_uris.small}" class="w-full"/><div>${card.set_name}</div><span class="text-gray-500 text-xs" >USD</span><span class="font-bold">${price}</span></div>`
+        }).join('')
+      );
+    } else {
+      $('.js-card-previews').html('<div class="text-red-600">La carta no fue encontrada</div>');
+    }
+  }).error(function() {
+    $('.js-card-previews').html('<div class="text-red-600">La carta no fue encontrada</div>');
+  });
+});

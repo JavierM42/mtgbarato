@@ -43,7 +43,6 @@ class BuyListingsController < ApplicationController
     listing = BuyListing.find(params[:id])
 
     if params[:set_name] != listing.card.set_name
-      listing.specific_set = params[:set_name].present?
       if card = CardService.new(name: listing.card.name, set_name: params[:set_name]).find_or_create_card
         listing.card = card
       else
@@ -52,6 +51,7 @@ class BuyListingsController < ApplicationController
       end
     end
 
+    listing.specific_set = params[:set_name].present?
     listing.amount = params[:amount]
     listing.notes = params[:notes]
     listing.foil = params[:foil] == 'foil'

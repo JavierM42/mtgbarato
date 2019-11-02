@@ -3,13 +3,15 @@
     . Vendo
     .flex.items-center.my-2
       = number_field_tag 'amount', @listing.amount, min: 1, step: 1, class: 'w-12 rounded border border-gray-300 p-2 text-right'
-      .text-base.text-gray-700.mx-2 x #{@listing.card.name}
+      .text-base.text-gray-700.mx-2 x
+      = text_field_tag 'name', @listing.card.name, class: 'js-fetch-card-data js-card-name w-full rounded border border-gray-300 p-2 italic bg-gray-200', disabled: true
     .flex.items-center.my-2
       .text-base.text-gray-700.mx-2 de
-      = text_field_tag 'set_name', @listing.set_confirmed || @listing.specific_set ? @listing.card.set_name : '', class: 'w-full rounded border border-gray-300 p-1 italic', placeholder: 'edición'
+      = text_field_tag 'set_name', @listing.set_confirmed || @listing.specific_set ? @listing.card.set_name : '', class: 'js-fetch-card-data js-card-set-name w-full rounded border border-gray-300 p-1 italic', placeholder: 'edición'
     .flex.my-2
-      = check_box_tag 'foil', 'foil', @listing.foil
+      = check_box_tag 'foil', 'foil', @listing.foil, class: 'js-fetch-card-data js-card-foil'
       label.text-gray-700.mx-2 for="foil" Foil
+    .flex.flex-wrap.js-card-previews
     .flex.items-center.my-2
       label.mx-2 for="notes" Notas
       = text_field_tag 'notes', @listing.notes, class: 'w-full rounded border border-gray-300 p-2'

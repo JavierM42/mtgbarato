@@ -41,7 +41,6 @@ class SellListingsController < ApplicationController
     listing = SellListing.find(params[:id])
 
     if params[:set_name] && params[:set_name] != listing.card.set_name
-      listing.set_confirmed = true
       if card = CardService.new(name: listing.card.name, set_name: params[:set_name]).find_or_create_card
         listing.card = card
       else
@@ -50,6 +49,7 @@ class SellListingsController < ApplicationController
       end
     end
 
+    listing.set_confirmed = params[:set_name].present?
     listing.amount = params[:amount]
     listing.notes = params[:notes]
     listing.foil = params[:foil] == 'foil'
