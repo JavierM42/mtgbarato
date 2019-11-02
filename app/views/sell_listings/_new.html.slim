@@ -15,4 +15,9 @@
     .flex.items-center.my-2
       label.mx-2 for="notes" Notas
       = text_field_tag 'notes', '', class: 'w-full rounded border border-gray-300 p-2'
+    .flex.items-center.my-2
+      label.mx-2 for="discount" Descuento
+      = number_field_tag 'discount', '0', min: 0, max: 100, step: 5, class: 'w-16 rounded border border-gray-300 p-2 text-right'
+      .text-base.text-gray-700.mx-2 %
+      .text-xs.text-gray-700.italic.mx-2 Tu carta aparecerá más arriba en los listados si tiene descuento.
   = submit_tag 'Agregar', class: 'w-full bg-green-600 text-white font-bold border-b-4 px-2 py-1 border-green-900 hover:bg-green-500'

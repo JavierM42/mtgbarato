@@ -40,13 +40,28 @@ class BuyListingDecorator < ApplicationDecorator
   def price
     h.content_tag('div',
       h.content_tag('span', 'USD', class: 'text-gray-700 text-sm font-bold') +
-      h.content_tag('span', object.price || '?', class: 'text-gray-800 text-xl')
+      (
+        object.discount != 0 ?
+        h.content_tag('span', object.foil ? object.card.foil_price : object.card.price, class: 'text-base text-gray-500 line-through mx-1')
+        :
+        ''
+      ) +
+      h.content_tag('span', h.number_with_precision(object.price, precision: 2) || '?', class: 'text-gray-800 text-xl')
     ) + 
     h.link_to( 
       'Ver detalle de precios en TCG',
       "https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{object.card.name.gsub(" ", "+")}&orientation=list",
       class: "text-orange-600 hover:text-orange-400 cursor-pointer",
       target: "_blank"
+    )
+  end
+
+  def discount
+    h.content_tag('div',
+      object.discount != 0 ?
+      h.content_tag('span', "#{object.discount}%", class: 'rounded text-gray-700 text-base')
+      :
+      ''
     )
   end
 end
