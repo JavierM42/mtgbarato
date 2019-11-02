@@ -1,8 +1,8 @@
 = form_tag sell_listings_path
   .mb-4
     . Vendo
-    .flex.items-center.my-2
-      = number_field_tag 'amount', 1, min: 1, step: 1, class: 'w-10 rounded border border-gray-300 p-2 text-right'
+    .flex.items-center.mt-2.mb-12
+      = number_field_tag 'amount', 1, min: 1, step: 1, class: 'w-12 rounded border border-gray-300 p-2 text-right'
       .text-base.text-gray-700.mx-2 x
       .relative.w-full
         = text_field_tag 'name', '', class: 'js-autocomplete-card w-full rounded border border-gray-300 p-2 italic', placeholder: 'Nombre de carta', autocomplete: 'off'

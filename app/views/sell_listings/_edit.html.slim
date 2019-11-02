@@ -2,7 +2,7 @@
   .mb-4
     . Vendo
     .flex.items-center.my-2
-      = number_field_tag 'amount', @listing.amount, min: 1, step: 1, class: 'w-10 rounded border border-gray-300 p-2 text-right'
+      = number_field_tag 'amount', @listing.amount, min: 1, step: 1, class: 'w-12 rounded border border-gray-300 p-2 text-right'
       .text-base.text-gray-700.mx-2 x #{@listing.card.name}
     .flex.items-center.my-2
       .text-base.text-gray-700.mx-2 de
