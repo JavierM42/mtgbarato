@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   root to: 'application#home'
 
   get '/home', to: 'application#home', as: 'home'
-  get '/info', to: 'application#info', as: 'info'
   get '/contact', to: 'application#contact', as: 'contact'
   
   get '/sell_catalog', to: 'sell_catalog#index', as: 'sell_catalog'

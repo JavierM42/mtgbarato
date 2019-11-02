@@ -5,7 +5,6 @@ ul.nav.navbar-nav.text-orange-900
   - if current_user
     li= link_to('<span class="glyphicon glyphicon-arrow-down"></span> Mi lista de compra'.html_safe, buy_listings_path)
     li= link_to('<span class="glyphicon glyphicon-arrow-up"></span> Mi lista de venta'.html_safe, sell_listings_path)
-  li= link_to('<span class="glyphicon glyphicon-question-sign"></span> Acerca del sitio'.html_safe, info_path)
   - if current_user
     li= link_to('<span class="glyphicon glyphicon-user"></span> Mi Perfil'.html_safe, edit_user_registration_path)
 

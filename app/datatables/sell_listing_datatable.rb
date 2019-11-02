@@ -6,7 +6,8 @@ class SellListingDatatable < AjaxDatatablesRails::ActiveRecord
       card_name:          { source: "Card.name", cond: :like, searchable: true, orderable: true },
       set_name:           { source: "Card.set_name", cond: :like, searchable: true, orderable: true },
       price:              { source: "SellListing.price", searchable: false, orderable: true },
-      discount:           { source: "SellListing.discount", searchable: false, orderable: true }
+      discount:           { source: "SellListing.discount", searchable: false, orderable: true },
+      user:               { source: "SellListing.user_id", searchable: false, orderable: true}
     }
   end
 
