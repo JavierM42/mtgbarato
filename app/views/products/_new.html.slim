@@ -1,0 +1,11 @@
+= form_tag products_path
+  .mb-4
+    . Vendo
+    .flex.items-center.my-2
+      = text_field_tag 'name', '', class: 'w-full rounded border border-gray-300 p-2', placeholder: 'Nombre', autocomplete: 'off'
+    .flex.items-center.my-2
+      = text_area_tag 'description', '', class: 'w-full h-24 rounded border border-gray-300 p-1', placeholder: 'Descripción'
+    .flex.items-center.my-2
+      label.mx-2 for="price" Precio: $
+      = number_field_tag 'price', '', class: 'w-full rounded border border-gray-300 p-2'
+  = submit_tag 'Publicar', class: 'w-full bg-green-600 text-white font-bold border-b-4 px-2 py-1 border-green-900 hover:bg-green-500'

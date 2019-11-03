@@ -46,7 +46,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.1.2/dist/js/autoComplete.min.js"></script>
 		<script>
 			$(document).ready( function () {
-					var table = $('.js-datatable').DataTable( {
+					var table = $('.js-datatable-cards').DataTable( {
 						autoWidth: false,
 						order: [[ 2, "desc" ]],
 						language: {
@@ -60,6 +60,20 @@
 							{ "targets": [ 4 ], "sortable": false, "searchable": false },
 							{ "targets": [ 5 ], "visible": false },
 							{ "targets": [ 6 ], "visible": false }
+						]
+					});
+			} );
+			$(document).ready( function () {
+					var table = $('.js-datatable-products').DataTable( {
+						autoWidth: false,
+						order: [[ 1, "desc" ]],
+						language: {
+							url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+						},
+						columnDefs: [
+							{ "targets": [ 0 ], "sortable": true, "searchable": true },
+							{ "targets": [ 1 ], "sortable": true, "searchable": false },
+							{ "targets": [ 2 ], "sortable": true, "searchable": true },
 						]
 					});
 			} );

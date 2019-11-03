@@ -1,0 +1,45 @@
+section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
+  .flex.justify-between
+    h2.text-2xl.text-orange-700.font-bold.mb-4 Productos en venta
+
+  .flex.justify-end
+    - if current_user.products.count < 5
+      = link_to "Agregar producto", new_product_path, class: 'block text-center w-32 bg-green-600 text-white font-bold border-b-4 px-2 py-2 border-green-900 hover:bg-green-500', remote: true
+    - else
+      . Solo podés publicar hasta 5 productos. Escribime a ayuda@mtgbarato.store si querés publicar más items.
+
+  table.sortable-theme-light.w-full.js-datatable-products.compact.stripe.hover.row-border
+    thead
+      th Producto
+      th Precio
+      th Acciones
+    tbody
+      - @products.each do |product|
+        tr
+          td.
+            .text-lg.text-gray-800 #{product.name}
+            .text-sm.text-gray-700 #{product.description}
+          td $#{product.price.to_i}
+          td
+            = link_to "Editar", edit_product_path(product.id), class: 'block text-center w-full bg-green-600 text-white font-bold border-b-4 px-2 py-1 border-green-900 hover:bg-green-500', remote: true
+            hr.my-1
+            = form_tag product_path(product.id), method: :delete
+              = submit_tag 'Eliminar', class: 'w-full bg-red-600 text-white font-bold border-b-4 px-2 py-1 border-red-900 hover:bg-red-500'
+
+.modal.fade id="edit-modal" tabindex="-1" role="dialog" aria-hidden="true"
+  .modal-dialog role="document"
+    .modal-content
+      .flex.border-b.border-gray-300.p-4
+        h5.text-lg.font-bold.flex-1 Editar producto
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+      .modal-body
+
+.modal.fade id="new-modal" tabindex="-1" role="dialog" aria-hidden="true"
+  .modal-dialog role="document"
+    .modal-content
+      .flex.border-b.border-gray-300.p-4
+        h5.text-lg.font-bold.flex-1 Nuevo producto
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+      .modal-body

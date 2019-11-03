@@ -1,0 +1,28 @@
+section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
+  h2.text-2xl.text-orange-700.font-bold.mb-4 Productos en venta
+  table.js-datatable-products.sortable-theme-light.w-full.compact.stripe.hover.row-border
+    thead
+      tr
+        th Producto
+        th Precio
+        th Usuario
+    tbody
+      - @products.each do |product|
+        tr
+          td.
+            .text-lg.text-gray-800 #{product.name}
+            .text-sm.text-gray-700 #{product.description}
+          td $#{product.price.to_i}
+          td
+            - if product.user.email == 'dsfoodandgames@gmail.com'
+              .flex.items-center
+                a href="https://www.facebook.com/Dragonstonefoodygames/" target="_blank"
+                  img.h-12.mr-2 src="dragonstone.jpg"
+                .
+                  a.text-gray-600 href="https://www.facebook.com/Dragonstonefoodygames/" Dragon Stone
+                  .italic.text-xs.text-gray-800 #{product.user.phone}
+            - elsif current_user == product.user
+              . Yo
+            - else
+              .text-gray-600 #{product.user.full_name}
+              .italic.text-xs.text-gray-800 #{product.user.phone}
