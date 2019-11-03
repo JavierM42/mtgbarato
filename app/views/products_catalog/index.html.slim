@@ -3,12 +3,14 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
   table.js-datatable-products.sortable-theme-light.w-full.compact.stripe.hover.row-border
     thead
       tr
+        th Categoría
         th Producto
         th Precio
         th Usuario
     tbody
       - @products.each do |product|
         tr
+          td #{product.category}
           td.
             .text-lg.text-gray-800 #{product.name}
             .text-sm.text-gray-700 #{product.description}

@@ -7,8 +7,14 @@ class ProductsController < ApplicationController
     render
   end
 
+  def new
+    @categories = ["Sleeves", "MTGO", "Playmats", "Deckboxes", "Boosters", "Mazos", "Otros"]
+  end
+
   def edit
     @product = Product.find(params[:id])
+
+    @categories = ["Sleeves", "MTGO", "Playmats", "Deckboxes", "Boosters", "Mazos", "Otros"]
   end
 
   def create
@@ -17,7 +23,8 @@ class ProductsController < ApplicationController
         user: current_user,
         name: params[:name],
         description: params[:description],
-        price: params[:price].to_f
+        price: params[:price].to_f,
+        category: params[:category]
       )
       product.save
       flash[:notice] = "#{product.name} fue agregado a tus productos en venta"
@@ -32,6 +39,7 @@ class ProductsController < ApplicationController
     product = Product.find(params[:id])
     product.name = params[:name]
     product.description = params[:description]
+    product.category = params[:category]
     product.price = params[:price].to_f
     product.save
     flash[:notice] = "#{product.name} fue actualizado"

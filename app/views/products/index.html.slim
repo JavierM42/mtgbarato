@@ -10,12 +10,14 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
 
   table.sortable-theme-light.w-full.js-datatable-products.compact.stripe.hover.row-border
     thead
+      th Categoría
       th Producto
       th Precio
       th Acciones
     tbody
       - @products.each do |product|
         tr
+          td #{product.category}
           td.
             .text-lg.text-gray-800 #{product.name}
             .text-sm.text-gray-700 #{product.description}

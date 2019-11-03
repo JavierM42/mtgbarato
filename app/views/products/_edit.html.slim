@@ -6,6 +6,9 @@
   .flex.items-center.my-2
     = text_area_tag 'description', @product.description, class: 'w-full h-24 rounded border border-gray-300 p-1', placeholder: 'Descripción'
   .flex.items-center.my-2
+    label.mx-2 for="category" Categoría
+    = select_tag 'category', options_for_select(@categories, @product.category), class: 'w-full rounded border border-gray-300 p-1', placeholder: 'Categoría'
+  .flex.items-center.my-2
     label.mx-2 for="price" Precio: $
     = number_field_tag 'price', @product.price, class: 'w-full rounded border border-gray-300 p-2'
 = submit_tag 'Actualizar', class: 'w-full bg-green-600 text-white font-bold border-b-4 px-2 py-1 border-green-900 hover:bg-green-500'
