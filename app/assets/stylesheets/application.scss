@@ -26,6 +26,22 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+.foil {
+  position: relative;
+
+  &::after {
+    display: block;
+    position: absolute;
+    background: linear-gradient(to bottom right, orange , yellow, green, cyan, blue, violet); /* Standard syntax (must be last) */
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    content: '';
+    opacity: 0.45;
+  }
+}
+
 
 .spoiler-view {
   display: flex;

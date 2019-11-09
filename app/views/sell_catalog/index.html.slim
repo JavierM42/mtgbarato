@@ -5,7 +5,8 @@
       - @matches.each do |listing|
         div.w-48.rounded-lg.border.border-gray-300.bg-orange-100.p-2.m-1
           div.flex.justify-center
-            img.w-20 src="#{listing.card.thumbnail_uri}"
+            div.w-20 class="#{listing.foil ? 'foil' : ''}"
+              img.w-full src="#{listing.card.thumbnail_uri}"
           div.flex.justify-center
             - if listing.amount > 1
               span.text-sm.px-1 #{listing.amount}x
@@ -36,7 +37,8 @@
       - @featured_listings.each do |listing|
         div.w-48.rounded-lg.border.border-gray-300.bg-orange-100.p-2.m-1
           div.flex.justify-center
-            img.w-20 src="#{listing.card.thumbnail_uri}"
+            div.w-20 class="#{listing.foil ? 'foil' : ''}"
+              img.w-full src="#{listing.card.thumbnail_uri}"
           div.flex.justify-center
             - if listing.amount > 1
               span.text-sm.px-1 #{listing.amount}x

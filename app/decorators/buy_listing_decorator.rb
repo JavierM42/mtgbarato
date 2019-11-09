@@ -16,7 +16,9 @@ class BuyListingDecorator < ApplicationDecorator
         class: 'text-xs italic'),
       class: 'flex-1 mb-1 md:mt-4', style: 'min-width: 8rem') +
       
-      h.image_tag(object.card.thumbnail_uri, class: 'w-full md:w-32 mr-4', style: 'max-width: 8rem'),
+      h.content_tag('div',
+        h.image_tag(object.card.thumbnail_uri, class: 'w-full'),
+      class: "w-full md:w-32 mr-4 #{object.foil ? 'foil' : ''}", style: 'max-width: 8rem'),
     class: 'flex flex-wrap flex-row-reverse justify-end')
   end
 

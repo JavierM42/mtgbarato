@@ -22,7 +22,8 @@ table.sortable-theme-light.w-full.js-datatable-cards.compact.stripe.hover.row-bo
     - listings.each do |listing|
       tr
         td.w-16 class="md:w-20"
-          img.w-full src="#{listing.card.thumbnail_uri}"
+          div class="w-full #{listing.foil ? 'foil' : ''}"
+            img.w-full src="#{listing.card.thumbnail_uri}"
         td data-sort="#{listing.card.name}"
           span.text-sm.text-gray-700.font-bold.mr-1 #{listing.amount}x
           a.text-lg.text-orange-600.cursor-pointer class="hover:text-orange-400" href="https://deckbox.org/mtg/#{URI.escape(listing.card.name)}" #{listing.card.name}
