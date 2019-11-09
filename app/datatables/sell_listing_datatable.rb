@@ -6,7 +6,6 @@ class SellListingDatatable < AjaxDatatablesRails::ActiveRecord
       card_name:          { source: "Card.name", cond: :like, searchable: true, orderable: true },
       set_name:           { source: "Card.set_name", cond: :like, searchable: true, orderable: true },
       price:              { source: "SellListing.price", searchable: false, orderable: true },
-      discount:           { source: "SellListing.discount", searchable: false, orderable: true },
       user:               { source: "SellListing.user_id", searchable: false, orderable: true}
     }
   end
@@ -17,7 +16,6 @@ class SellListingDatatable < AjaxDatatablesRails::ActiveRecord
         thumbnail_uri:  record.decorate.thumbnail_uri,
         card_name:      record.decorate.card_info,
         price:          record.decorate.price,
-        discount:       record.decorate.discount,
         user:           record.decorate.user_info,
         DT_RowId:       record.id, # This will automagically set the id attribute on the corresponding <tr> in the datatable
       }

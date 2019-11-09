@@ -55,13 +55,4 @@ class BuyListingDecorator < ApplicationDecorator
       target: "_blank"
     )
   end
-
-  def discount
-    h.content_tag('div',
-      object.discount != 0 ?
-      h.content_tag('span', "#{object.discount}%", class: 'rounded text-gray-700 text-base')
-      :
-      ''
-    )
-  end
 end

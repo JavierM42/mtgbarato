@@ -56,6 +56,8 @@
             span.text-gray-700.text-sm.font-bold USD 
             span.text-base.text-gray-500.line-through.mx-1 #{listing.foil ? listing.card.foil_price : listing.card.price}
             span.text-gray-800.text-xl #{number_with_precision(listing.price, precision: 2)} 
+            div.flex.justify-end
+              span.rounded.bg-orange-600.text-white.text-xs.font-bold.p-1 #{listing.discount}% OFF
             a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{listing.card.name.gsub(" ", "+")}&orientation=list" target="_blank" Ver detalle de precios en TCG
           div.text-gray-600 #{listing.user.first_name} #{listing.user.last_name} 
           div.italic.text-gray-800.text-xs #{listing.user.phone}
@@ -71,7 +73,6 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
         th.w-16
         th Carta
         th Precio
-        th.w-16 %OFF
         th Usuario
     tbody
 
@@ -88,13 +89,12 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
         "ajax": {
           "url": $('#sell-catalog-datatable').data('source')
         },
-        order: [[ 3, "desc" ], [2, "desc"]],
+        order: [[2, "desc"]],
         "pagingType": "full_numbers",
         "columns": [
           {"data": "thumbnail_uri", sortable: false, class: 'card-thumbnail'},
           {"data": "card_name", class: 'card-name'},
           {"data": "price", class: 'card-price'},
-          {"data": "discount", class: 'card-discount'},
           {"data": "user", class: 'card-user', sortable: true},
         ],
         "drawCallback": function() {
