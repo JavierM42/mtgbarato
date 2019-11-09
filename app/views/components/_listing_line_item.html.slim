@@ -4,7 +4,7 @@ tr
       img.w-full src="#{listing.card.thumbnail_uri}"
   td data-sort="#{listing.card.name}"
     span.text-sm.text-gray-700.font-bold.mr-1 #{listing.amount}x
-    a.text-lg.text-orange-600.cursor-pointer class="hover:text-orange-400" href="https://deckbox.org/mtg/#{URI.escape(listing.card.name)}" #{listing.card.name}
+    a.text-lg.text-orange-600.cursor-pointer class="hover:text-orange-400 cursor-pointer" href="https://deckbox.org/mtg/#{URI.escape(listing.card.name)}" #{listing.card.name}
     - if listing.foil
       span.text-sm.uppercase.font-bold.tracking-wider  FOIL
     div.text-xs.italic
