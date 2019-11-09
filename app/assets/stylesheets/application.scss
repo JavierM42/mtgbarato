@@ -77,3 +77,39 @@ body {
     padding: 1rem !important;
   }
 }
+
+#sell-catalog-datatable,
+#buy-catalog-datatable {
+  &_filter {
+    width: 100%;
+    float: none;
+    display: flex;
+    justify-content: center;
+
+    label {
+      position: relative;
+
+      &::after {
+        content: "🔍";
+        position: absolute;
+        font-size: 20px;
+        top: 5px;
+        right: 7px;
+      }
+    }
+    input {
+      padding: .5rem;
+      border-radius: .5rem;
+      border: 1px solid #CBD5E0;
+      width: 24rem;
+      max-width: 100%;
+      margin-bottom: 2rem;
+      font-weight: 400;
+
+      &:focus {
+        border: 1px solid #F6AD55;
+        outline: none;
+      }
+    }
+  }
+}

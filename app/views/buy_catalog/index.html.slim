@@ -48,8 +48,30 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
       $('#buy-catalog-datatable').DataTable({
         autoWidth: false,
         language: {
-          url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+          "sProcessing":     "Procesando...",
+          "sLengthMenu":     "Mostrar _MENU_ cartas",
+          "sZeroRecords":    "No se encontraron cartas para los filtros elegidos",
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+          "sInfo":           "Mostrando cartas _START_ a _END_ de un total de _TOTAL_ cartas",
+          "sInfoEmpty":      "No hay cartas",
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ cartas)",
+          "sInfoPostFix":    "",
+          "sSearch":         "",
+          "sUrl":            "",
+          "sInfoThousands":  ",",
+          "sLoadingRecords": "Cargando...",
+          "oPaginate": {
+            "sFirst":    "Primero",
+            "sLast":     "Último",
+            "sNext":     "Siguiente",
+            "sPrevious": "Anterior"
+          },
+          "oAria": {
+            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+          }
         },
+        "lengthChange": false,
         "processing": true,
         "serverSide": true,
         "ajax": {
