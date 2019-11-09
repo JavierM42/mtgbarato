@@ -61,11 +61,12 @@ body {
   }
 
   .card-name {
-    width: 11rem;
+    width: 100%;
 
     .card-image {
-      width: 11rem !important;
-      max-width: 11rem !important;
+      width: 100% !important;
+      max-width: 11.5rem !important;
+      margin: 0 !important;
     }
   }
 
