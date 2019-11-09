@@ -7,6 +7,7 @@ class SellCatalogController < ApplicationController
         end
 
         @sell_listings = SellListing.all
+        @featured_listings = SellListing.where.not(discount: 0).where('price > 20').order("RANDOM()").limit(5)
         render
       end
       
