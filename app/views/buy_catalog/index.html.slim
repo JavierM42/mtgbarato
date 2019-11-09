@@ -10,7 +10,7 @@
           div.flex.justify-center
             - if listing.amount > 1
               span.text-sm.px-1 #{listing.amount}x
-            a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="https://deckbox.org/mtg/#{URI.escape(listing.card.name)}" #{listing.card.name}
+            a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{listing.card.name.gsub(" ", "+")}&orientation=list" target="_blank" #{listing.card.name}
             - if listing.foil
               span.text-sm.uppercase.font-bold.tracking-wider.px-1 FOIL
           div.flex.justify-center
@@ -25,7 +25,6 @@
           div
             span.text-gray-700.text-sm.font-bold USD 
             span.text-gray-800.text-xl #{number_with_precision(listing.price, precision: 2)} 
-            a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{listing.card.name.gsub(" ", "+")}&orientation=list" target="_blank" Ver detalle de precios en TCG
           div.text-gray-600 #{listing.user.first_name} #{listing.user.last_name} 
           div.italic.text-gray-800.text-xs #{listing.user.phone}
 
