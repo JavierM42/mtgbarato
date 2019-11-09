@@ -79,7 +79,7 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
 |
   <script>
     $(document).ready(function() {
-      $('#sell-catalog-datatable').DataTable({
+      const table = $('#sell-catalog-datatable').DataTable({
         autoWidth: false,
         language: {
           "sProcessing":     "Procesando...",
@@ -151,5 +151,40 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
         $('.js-spoiler-view').removeClass('text-orange-500');
         $('#sell-catalog-datatable').addClass('spoiler-view');
       });
+			new autoComplete({
+				data: {
+					src: async () => {
+						const query = document.querySelector("#sell-catalog-datatable_filter input").value;
+						const source = await fetch(`https://api.scryfall.com/cards/autocomplete?q=${query}`);
+						const response = await source.json();
+						return response.data;
+					},
+					cache: false
+				},
+				selector: "#sell-catalog-datatable_filter input",   // Input field selector              | (Optional)
+				threshold: 2,                        // Min. Chars length to start Engine | (Optional)
+				debounce: 100,                       // Post duration for engine to start | (Optional)
+				resultsList: {                       // Rendered results list object      | (Optional)
+						render: true,
+						container: (source) => {
+							source.classList.add('absolute', 'border-b', 'w-full', 'bg-white', 'rounded-b', 'border-l', 'border-r');
+						},
+						destination: document.querySelector("#sell-catalog-datatable_filter input"),
+						element: "ul"
+				},
+				maxResults: 5,                         // Max. number of rendered results | (Optional)
+				highlight: true,                       // Highlight matching results      | (Optional)
+				resultItem: {                          // Rendered result item            | (Optional)
+					content: (data, source) => {
+						source.innerHTML = data.match;
+						source.classList.add('p-2', 'border-t', 'hover:bg-gray-200', 'text-left');
+					},
+					element: "li"
+				},
+				onSelection: feedback => {             // Action script onSelection event | (Optional)
+					document.querySelector('#sell-catalog-datatable_filter input').value = feedback.selection.value;
+          table.search( feedback.selection.value ).draw();
+				}
+			});
     });
   </script>

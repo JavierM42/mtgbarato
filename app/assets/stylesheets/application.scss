@@ -79,12 +79,14 @@ body {
 }
 
 #sell-catalog-datatable,
-#buy-catalog-datatable {
+#buy-catalog-datatable,
+#DataTables_Table_0 {
   &_filter {
     width: 100%;
     float: none;
     display: flex;
     justify-content: center;
+    margin-bottom: 2rem;
 
     label {
       position: relative;
@@ -95,16 +97,16 @@ body {
         font-size: 20px;
         top: 5px;
         right: 7px;
+        opacity: 0.5;
       }
     }
     input {
       padding: .5rem;
-      border-radius: .5rem;
       border: 1px solid #CBD5E0;
       width: 24rem;
       max-width: 100%;
-      margin-bottom: 2rem;
       font-weight: 400;
+      margin: 0;
 
       &:focus {
         border: 1px solid #F6AD55;

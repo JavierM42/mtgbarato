@@ -28,3 +28,44 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
             - else
               .text-gray-600 #{product.user.full_name}
               .italic.text-xs.text-gray-800 #{product.user.phone}
+
+|
+  <script>
+    $(document).ready( function () {
+      $('.js-datatable-products').DataTable( {
+        autoWidth: false,
+        order: [[ 1, "desc" ]],
+        language: {
+          "sProcessing":     "Procesando...",
+          "sLengthMenu":     "Mostrar _MENU_ productos",
+          "sZeroRecords":    "No se encontraron productos para los filtros elegidos",
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+          "sInfo":           "Mostrando productos _START_ a _END_ de un total de _TOTAL_ productos",
+          "sInfoEmpty":      "No hay productos",
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ productos)",
+          "sInfoPostFix":    "",
+          "sSearch":         "",
+          "sUrl":            "",
+          "sInfoThousands":  ",",
+          "sLoadingRecords": "Cargando...",
+          "oPaginate": {
+            "sFirst":    "Primero",
+            "sLast":     "Último",
+            "sNext":     "Siguiente",
+            "sPrevious": "Anterior"
+          },
+          "oAria": {
+            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+          }
+        },
+        "lengthChange": false,
+        columnDefs: [
+          { "targets": [ 0 ], "sortable": true, "searchable": true },
+          { "targets": [ 1 ], "sortable": true, "searchable": true },
+          { "targets": [ 2 ], "sortable": true, "searchable": false },
+          { "targets": [ 3 ], "sortable": true, "searchable": true },
+        ]
+      });
+    });
+  </script> 
