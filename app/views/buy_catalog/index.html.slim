@@ -36,10 +36,8 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
   table.sortable-theme-light.w-full.compact.stripe.hover.row-border id="buy-catalog-datatable" class="" data-source="#{buy_catalog_path(format: :json)}"
     thead
       tr
-        th.w-16
         th Carta
-        th Precio
-        th Usuario
+        th class='w-1/3' Precio
     tbody
 
 |
@@ -77,13 +75,11 @@ section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
         "ajax": {
           "url": $('#buy-catalog-datatable').data('source')
         },
-        order: [[ 2, "desc" ]],
+        order: [[1, "desc"]],
         "pagingType": "full_numbers",
         "columns": [
-          {"data": "thumbnail_uri", sortable: false, class: 'card-thumbnail'},
           {"data": "card_name", class: 'card-name'},
-          {"data": "price", class: 'card-price'},
-          {"data": "user", class: 'card-user', sortable: true},
+          {"data": "price", class: 'card-price'}
         ],
          "drawCallback": function() {
           $('tr').mouseover(function() {
