@@ -16,11 +16,12 @@ $('.js-fetch-card-data').change(function() {
       }
     });
     if (cards.length > 0) {
-      $('.js-card-previews').html(
-        '<div class="w-full my-2 text-orange font-bold">Previsualización</div>' + 
+       $('.js-card-previews').html(
+        '<div class="w-full my-2 text-orange font-bold">Edición</div>' + 
+        `<div class="w-24 bg-gray-100 rounded border border-gray-300 m-2 p-1"><input type="radio" name="set_name" value="" id="no-set" checked="checked" /><label class="w-24" for="no-set"><div>Cualquier edición</div></div>` +
         cards.map(function(card) {
           const price =  $('.js-card-foil').prop('checked') ? card.prices.usd_foil : card.prices.usd; 
-          return `<div class="w-24 bg-gray-100 rounded border border-gray-300 m-2 p-1"><img src="${card.image_uris.small}" class="w-full"/><div>${card.set_name}</div><span class="text-gray-500 text-xs" >USD</span><span class="font-bold">${price}</span></div>`
+          return `<div class="w-24 bg-gray-100 rounded border border-gray-300 m-2 p-1"><input type="radio" name="set_name" value="${card.set_name}" id="${card.set_name}" /><label class="w-24" for="${card.set_name}"><img src="${card.image_uris.small}" class="w-full"/><div>${card.set_name}</div><span class="text-gray-500 text-xs" >USD</span><span class="font-bold">${price}</span></label></div>`
         }).join('')
       );
     } else {

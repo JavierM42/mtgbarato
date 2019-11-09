@@ -1,14 +1,11 @@
 = form_tag sell_listings_path
   .mb-4
     . Vendo
-    .flex.items-center.mt-2.mb-12
+    .flex.items-center.my-2
       = number_field_tag 'amount', 1, min: 1, step: 1, class: 'w-12 rounded border border-gray-300 p-2 text-right'
       .text-base.text-gray-700.mx-2 x
       .relative.w-full
         = text_field_tag 'name', '', class: 'js-fetch-card-data js-card-name js-autocomplete-card w-full rounded border border-gray-300 p-2 italic', placeholder: 'Nombre de carta', autocomplete: 'off'
-    .flex.items-center.my-2
-      .text-base.text-gray-700.mx-2 de
-      = text_field_tag 'set_name', '', class: 'js-fetch-card-data js-card-set-name w-full rounded border border-gray-300 p-1 italic', placeholder: 'edición'
     .flex.my-2
       = check_box_tag 'foil', 'foil', false, class: 'js-fetch-card-data js-card-foil'
       label.text-gray-700.mx-2 for="foil" Foil
