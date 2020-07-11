@@ -21,6 +21,10 @@
               = f.text_field(:last_name, placeholder: 'Last name', class: 'form-control')
 
           . class="form-group md:px-2"
+            = f.label(:user_name, "Nombre de usuario")
+            = f.text_field(:user_name, placeholder: 't1ornitopteropaso', class: 'form-control')
+
+          . class="form-group md:px-2"
             = f.label(:email)
             = f.email_field(:email, placeholder: 'Hello@youremail.com', class: 'form-control')
 

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        @user = User.find(params[:id])
+        @user = User.find_by(user_name: params[:id]) || User.find_by(id: params[:id])
         render
       end
 
