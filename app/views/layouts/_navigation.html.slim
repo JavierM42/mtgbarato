@@ -6,8 +6,7 @@ ul.nav.navbar-nav.text-orange-900
   - if current_user
     li= link_to('Mi lista de compra'.html_safe, buy_listings_path)
     li= link_to('Mi lista de venta'.html_safe, sell_listings_path)
-    li= link_to('Mis productos de venta'.html_safe, products_path)
-    li= link_to('👤Mi Perfil'.html_safe, edit_user_registration_path)
+    li= link_to('👤Mis datos'.html_safe, edit_user_registration_path)
 
 ul.nav.navbar-nav.navbar-right.text-orange-900
   - if current_user
