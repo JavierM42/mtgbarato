@@ -1,0 +1,248 @@
+
+h2.text-2xl.text-orange-700.font-bold.mb-2 #{@user.full_name}
+h3.text-xl.mb-4 #{@user.phone}
+
+section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
+  h2.text-2xl.text-orange-700.font-bold.mb-4 Vende
+  .flex.justify-end.mb-4.text-white
+    button.js-list-view.p-2.border.rounded-l.border-orange-500.font-bold.bg-orange-500 Ver Lista
+    button.js-spoiler-view.p-2.border.rounded-r.border-orange-500.text-orange-500.font-bold Ver Imágenes
+  table.sortable-theme-light.w-full.compact.stripe.hover.row-border id="sell-catalog-datatable" class="" data-source="#{user_path(@user, format: :json, sell: true)}"
+    thead
+      tr
+        th Carta
+        th class='w-1/3' Precio
+    tbody
+
+section.mb-12.bg-gray-100.py-4.px-2.rounded.border-gray-300.border
+  h2.text-2xl.text-orange-700.font-bold.mb-4 Busca
+  .flex.justify-end.mb-4.text-white
+    button.js-list-view.p-2.border.rounded-l.border-orange-500.font-bold.bg-orange-500 Ver Lista
+    button.js-spoiler-view.p-2.border.rounded-r.border-orange-500.text-orange-500.font-bold Ver Imágenes
+  table.sortable-theme-light.w-full.compact.stripe.hover.row-border id="buy-catalog-datatable" class="" data-source="#{user_path(@user, format: :json, buy: true)}"
+    thead
+      tr
+        th Carta
+        th class='w-1/3' Precio
+    tbody
+
+|
+  <script>
+    $(document).ready(function() {
+      const table = $('#sell-catalog-datatable').DataTable({
+        autoWidth: false,
+        language: {
+          "sProcessing":     "Procesando...",
+          "sLengthMenu":     "Mostrar _MENU_ cartas",
+          "sZeroRecords":    "No se encontraron cartas para los filtros elegidos",
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+          "sInfo":           "Mostrando cartas _START_ a _END_ de un total de _TOTAL_ cartas",
+          "sInfoEmpty":      "No hay cartas",
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ cartas)",
+          "sInfoPostFix":    "",
+          "sSearch":         "",
+          "sUrl":            "",
+          "sInfoThousands":  ",",
+          "sLoadingRecords": "Cargando...",
+          "oPaginate": {
+            "sFirst":    "Primero",
+            "sLast":     "Último",
+            "sNext":     "Siguiente",
+            "sPrevious": "Anterior"
+          },
+          "oAria": {
+            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+          }
+        },
+        "lengthChange": false,
+        "pageLength": 15,
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+          "url": $('#sell-catalog-datatable').data('source')
+        },
+        order: [[1, "desc"]],
+        "pagingType": "full_numbers",
+        "columns": [
+          {"data": "card_name", class: 'card-name'},
+          {"data": "price", class: 'card-price'}
+        ],
+        "drawCallback": function() {
+          $('tr').mouseover(function() {
+            if (document.querySelector('.spoiler-view')) {
+              $(this).children('.card-name').css('opacity', '1');
+              $(this).children('.card-price').css('opacity', '1');
+              $(this).children('.card-user').css('opacity', '1');
+            }
+          });
+          $('tr').mouseout(function() {
+            if (document.querySelector('.spoiler-view')) {
+              $(this).children('.card-name').css('opacity', '');
+              $(this).children('.card-price').css('opacity', '');
+              $(this).children('.card-user').css('opacity', '');
+            }
+          });
+        }
+      });
+
+      $('.js-list-view').click(function() {
+        $('.js-list-view').addClass('bg-orange-500');
+        $('.js-list-view').removeClass('text-orange-500');
+        $('.js-spoiler-view').addClass('text-orange-500');
+        $('.js-spoiler-view').removeClass('bg-orange-500');
+        $('#sell-catalog-datatable').removeClass('spoiler-view');
+      });
+      $('.js-spoiler-view').click(function() {
+        $('.js-list-view').addClass('text-orange-500');
+        $('.js-list-view').removeClass('bg-orange-500');
+        $('.js-spoiler-view').addClass('bg-orange-500');
+        $('.js-spoiler-view').removeClass('text-orange-500');
+        $('#sell-catalog-datatable').addClass('spoiler-view');
+      });
+			new autoComplete({
+				data: {
+					src: async () => {
+						const query = document.querySelector("#sell-catalog-datatable_filter input").value;
+						const source = await fetch(`https://api.scryfall.com/cards/autocomplete?q=${query}`);
+						const response = await source.json();
+						return response.data;
+					},
+					cache: false
+				},
+				selector: "#sell-catalog-datatable_filter input",   // Input field selector              | (Optional)
+				threshold: 2,                        // Min. Chars length to start Engine | (Optional)
+				debounce: 100,                       // Post duration for engine to start | (Optional)
+				resultsList: {                       // Rendered results list object      | (Optional)
+						render: true,
+						container: (source) => {
+							source.classList.add('absolute', 'border-b', 'w-full', 'bg-white', 'rounded-b', 'border-l', 'border-r');
+						},
+						destination: document.querySelector("#sell-catalog-datatable_filter input"),
+						element: "ul"
+				},
+				maxResults: 5,                         // Max. number of rendered results | (Optional)
+				highlight: true,                       // Highlight matching results      | (Optional)
+				resultItem: {                          // Rendered result item            | (Optional)
+					content: (data, source) => {
+						source.innerHTML = data.match;
+						source.classList.add('p-2', 'border-t', 'hover:bg-gray-200', 'text-left');
+					},
+					element: "li"
+				},
+				onSelection: feedback => {             // Action script onSelection event | (Optional)
+					document.querySelector('#sell-catalog-datatable_filter input').value = feedback.selection.value;
+          table.search( feedback.selection.value ).draw();
+				}
+			});
+    });
+
+    $(document).ready(function() {
+      const table = $('#buy-catalog-datatable').DataTable({
+        autoWidth: false,
+        language: {
+          "sProcessing":     "Procesando...",
+          "sLengthMenu":     "Mostrar _MENU_ cartas",
+          "sZeroRecords":    "No se encontraron cartas para los filtros elegidos",
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+          "sInfo":           "Mostrando cartas _START_ a _END_ de un total de _TOTAL_ cartas",
+          "sInfoEmpty":      "No hay cartas",
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ cartas)",
+          "sInfoPostFix":    "",
+          "sSearch":         "",
+          "sUrl":            "",
+          "sInfoThousands":  ",",
+          "sLoadingRecords": "Cargando...",
+          "oPaginate": {
+            "sFirst":    "Primero",
+            "sLast":     "Último",
+            "sNext":     "Siguiente",
+            "sPrevious": "Anterior"
+          },
+          "oAria": {
+            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+          }
+        },
+        "lengthChange": false,
+        "pageLength": 15,
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+          "url": $('#buy-catalog-datatable').data('source')
+        },
+        order: [[1, "desc"]],
+        "pagingType": "full_numbers",
+        "columns": [
+          {"data": "card_name", class: 'card-name'},
+          {"data": "price", class: 'card-price'}
+        ],
+         "drawCallback": function() {
+          $('tr').mouseover(function() {
+            if (document.querySelector('.spoiler-view')) {
+              $(this).children('.card-name').css('opacity', '1');
+              $(this).children('.card-price').css('opacity', '1');
+              $(this).children('.card-user').css('opacity', '1');
+            }
+          });
+          $('tr').mouseout(function() {
+            if (document.querySelector('.spoiler-view')) {
+              $(this).children('.card-name').css('opacity', '');
+              $(this).children('.card-price').css('opacity', '');
+              $(this).children('.card-user').css('opacity', '');
+            }
+          });
+        }
+      });
+
+      $('.js-list-view').click(function() {
+        $('.js-list-view').addClass('bg-orange-500');
+        $('.js-list-view').removeClass('text-orange-500');
+        $('.js-spoiler-view').addClass('text-orange-500');
+        $('.js-spoiler-view').removeClass('bg-orange-500');
+        $('#buy-catalog-datatable').removeClass('spoiler-view');
+      });
+      $('.js-spoiler-view').click(function() {
+        $('.js-list-view').addClass('text-orange-500');
+        $('.js-list-view').removeClass('bg-orange-500');
+        $('.js-spoiler-view').addClass('bg-orange-500');
+        $('.js-spoiler-view').removeClass('text-orange-500');
+        $('#buy-catalog-datatable').addClass('spoiler-view');
+      });
+      new autoComplete({
+				data: {
+					src: async () => {
+						const query = document.querySelector("#buy-catalog-datatable_filter input").value;
+						const source = await fetch(`https://api.scryfall.com/cards/autocomplete?q=${query}`);
+						const response = await source.json();
+						return response.data;
+					},
+					cache: false
+				},
+				selector: "#buy-catalog-datatable_filter input",   // Input field selector              | (Optional)
+				threshold: 2,                        // Min. Chars length to start Engine | (Optional)
+				debounce: 100,                       // Post duration for engine to start | (Optional)
+				resultsList: {                       // Rendered results list object      | (Optional)
+						render: true,
+						container: (source) => {
+							source.classList.add('absolute', 'border-b', 'w-full', 'bg-white', 'rounded-b', 'border-l', 'border-r');
+						},
+						destination: document.querySelector("#buy-catalog-datatable_filter input"),
+						element: "ul"
+				},
+				maxResults: 5,                         // Max. number of rendered results | (Optional)
+				highlight: true,                       // Highlight matching results      | (Optional)
+				resultItem: {                          // Rendered result item            | (Optional)
+					content: (data, source) => {
+						source.innerHTML = data.match;
+						source.classList.add('p-2', 'border-t', 'hover:bg-gray-200', 'text-left');
+					},
+					element: "li"
+				},
+				onSelection: feedback => {             // Action script onSelection event | (Optional)
+					document.querySelector('#buy-catalog-datatable_filter input').value = feedback.selection.value;
+          table.search( feedback.selection.value ).draw();
+				}
+			});
+    });
+  </script>

@@ -2,10 +2,10 @@ ul.nav.navbar-nav.text-orange-900
   li= link_to('🏠Home'.html_safe, root_path)
   li= link_to('🛒Cartas en venta'.html_safe, sell_catalog_path)
   li= link_to('👀Cartas buscadas'.html_safe, buy_catalog_path)
-  li= link_to('Productos en venta'.html_safe, products_catalog_path)
   - if current_user
     li= link_to('Mi lista de compra'.html_safe, buy_listings_path)
     li= link_to('Mi lista de venta'.html_safe, sell_listings_path)
+    li= link_to('Mi Perfil'.html_safe, user_path(current_user))
     li= link_to('👤Mis datos'.html_safe, edit_user_registration_path)
 
 ul.nav.navbar-nav.navbar-right.text-orange-900

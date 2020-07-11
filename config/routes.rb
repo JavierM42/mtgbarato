@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get '/home', to: 'application#home', as: 'home'
   get '/contact', to: 'application#contact', as: 'contact'
-  
+
   get '/sell_catalog', to: 'sell_catalog#index', as: 'sell_catalog'
   get '/buy_catalog', to: 'buy_catalog#index', as: 'buy_catalog'
   get '/products_catalog', to: 'products_catalog#index', as: 'products_catalog'
@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   resources :sell_listings, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :buy_listings, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :products, only: [:index, :new, :create, :edit, :update, :destroy]
-  
+
+  resources :users, only: [:show]
+
   get '/sell_listings_collection', to: 'sell_listings_collection#index', as: 'sell_listings_collection'
   post '/sell_listings_collection', to: 'sell_listings_collection#create', as: 'sell_listings_collection_create'
   put '/sell_listings_collection', to: 'sell_listings_collection#update', as: 'sell_listings_collection_update'

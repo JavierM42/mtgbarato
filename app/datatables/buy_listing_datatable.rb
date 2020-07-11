@@ -18,6 +18,10 @@ class BuyListingDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    BuyListing.includes(:card, :user).references(:card, :user).all
+    if params[:user_id]
+      BuyListing.includes(:card, :user).references(:card, :user).where(user_id: params[:user_id])
+    else
+      BuyListing.includes(:card, :user).references(:card, :user).all
+    end
   end
 end
