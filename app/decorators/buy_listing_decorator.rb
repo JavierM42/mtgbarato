@@ -8,14 +8,14 @@ class BuyListingDecorator < ApplicationDecorator
           "#{object.card.name}",
           "https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{object.card.name.gsub(" ", "+")}&orientation=list",
         class: 'text-lg text-orange-600 cursor-pointer', target: '_blank') +
-        
+
         (object.foil ? h.content_tag('span', 'Foil', class: 'ml-1 text-sm uppercase font-bold tracking-wider') : '') +
-        
+
         h.content_tag('div',
           object.any_set ? "Edición buscada no especificada. Mostrando #{object.card.set_name}" : object.card.set_name,
         class: 'text-xs italic truncate'),
       class: 'flex-1 mb-1 md:mt-4', style: 'min-width: 8rem') +
-      
+
       h.content_tag('div',
         h.image_tag(object.card.thumbnail_uri, class: 'w-full'),
       class: "card-image w-full md:w-32 mr-4 #{object.foil ? 'foil' : ''}", style: 'max-width: 8rem'),
@@ -37,7 +37,7 @@ class BuyListingDecorator < ApplicationDecorator
             ''
           ),
         class: 'inline-block'),
-      ) + 
+      ) +
 
       (object.notes ? h.content_tag('div', object.notes, class: 'text-sm') : '') +
 
@@ -57,7 +57,11 @@ class BuyListingDecorator < ApplicationDecorator
         elsif h.current_user == object.user
           h.content_tag('div', 'Yo')
         else
-          h.content_tag('div', object.user.full_name, class: 'text-gray-600') +
+          h.link_to(
+            object.user.full_name,
+            h.user_path(object.user.pretty_id),
+            class: 'text-orange-500'
+          ) +
           h.content_tag('div', object.user.phone, class: 'text-gray-800 italic text-xs')
         end,
       class: 'mt-8'),

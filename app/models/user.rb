@@ -12,4 +12,8 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def pretty_id
+    user_name.presence || id
+  end
 end
