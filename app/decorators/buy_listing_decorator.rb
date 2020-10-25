@@ -43,18 +43,7 @@ class BuyListingDecorator < ApplicationDecorator
 
 
       h.content_tag('div',
-        if object.user.email == 'dsfoodandgames@gmail.com'
-          h.content_tag('div',
-            h.link_to(
-              h.image_tag('dragonstone.jpg', class: 'h-12 mr-2'),
-              "https://www.facebook.com/Dragonstonefoodygames/", target: "_blank"
-            ) +
-            h.content_tag('div',
-              h.link_to('Dragon Stone', "https://www.facebook.com/Dragonstonefoodygames/", class: 'text-gray-600') +
-              h.content_tag('div', object.user.phone, class: 'text-gray-800 italic text-xs')
-            ),
-          class: 'flex items-center')
-        elsif h.current_user == object.user
+        if h.current_user == object.user
           h.content_tag('div', 'Yo')
         else
           h.link_to(

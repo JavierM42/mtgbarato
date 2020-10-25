@@ -3,11 +3,11 @@ table.sortable-theme-light.w-full.js-datatable-cards.compact.stripe.hover.row-bo
     .mx-2
       label.text-gray-700 for="minPrice" Mostrar cartas con precio desde
       input.w-12.border.border-gray-300.text-right.mx-1 id="minPrice" name="minPrice" value="0"
-      span.text-gray-700.text-sm.font-bold USD 
+      span.text-gray-700.text-sm.font-bold USD
     .mx-2
       label.text-gray-700 for="maxPrice" hasta
       input.w-12.border.border-gray-300.text-right.mx-1 id="maxPrice" name="maxPrice" value="10000"
-      span.text-gray-700.text-sm.font-bold USD 
+      span.text-gray-700.text-sm.font-bold USD
   .flex.justify-end.my-2.text-gray-700 Para filtrar por formato podés buscar 'modern' o 'standard'
   thead
     th
@@ -31,29 +31,22 @@ table.sortable-theme-light.w-full.js-datatable-cards.compact.stripe.hover.row-bo
             span.text-sm.uppercase.font-bold.tracking-wider  FOIL
           div.text-xs.italic
             - if listing.set_not_confirmed
-              span Edición no especificada. Mostrando 
+              span Edición no especificada. Mostrando
             - if listing.any_set
-              span Edición buscada no especificada, mostrando 
+              span Edición buscada no especificada, mostrando
             span #{listing.card.set_name}
           - if listing.notes
             div.text-sm #{listing.notes}
         td data-sort="#{listing.foil ? listing.card.foil_price : listing.card.price}"
           div
-            span.text-gray-700.text-sm.font-bold USD 
+            span.text-gray-700.text-sm.font-bold USD
             span.text-gray-800.text-xl #{(listing.foil ? listing.card.foil_price : listing.card.price) || '?'}
           a class="text-orange-600 hover:text-orange-400 cursor-pointer" href="https://shop.tcgplayer.com/magic/product/show?newSearch=false&IsProductNameExact=false&ProductName=#{listing.card.name.gsub(" ", "+")}&orientation=list" target="_blank" Ver detalle de precios en TCG
         td
-          - if listing.user.email == 'dsfoodandgames@gmail.com'
-            .flex.items-center
-              a href="https://www.facebook.com/Dragonstonefoodygames/" target="_blank"
-                = image_tag 'dragonstone.jpg', class: 'h-12 mr-2'
-              .
-                a.text-gray-600 href="https://www.facebook.com/Dragonstonefoodygames/" target="_blank" Dragon Stone
-                div.italic.text-gray-800.text-xs #{listing.user.phone}
-          - elsif current_user == listing.user
+          - if current_user == listing.user
             div.text-gray-600 Yo
           - else
-            div.text-gray-600 #{listing.user.first_name} #{listing.user.last_name} 
+            div.text-gray-600 #{listing.user.first_name} #{listing.user.last_name}
             div.italic.text-gray-800.text-xs #{listing.user.phone}
         /hidden columns
         td #{(listing.foil ? listing.card.foil_price : listing.card.price) || 0.00001}
